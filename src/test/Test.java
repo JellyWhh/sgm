@@ -7,7 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import edu.fudan.se.goalmodel.Element;
-import edu.fudan.se.goalmodel.Goal;
+import edu.fudan.se.machine.GoalMachine;
 import edu.fudan.se.message.SGMMessage;
 import edu.fudan.se.message.SGMMessagePool;
 
@@ -25,7 +25,7 @@ public class Test {
 		// TODO Auto-generated method stub
 		SGMMessagePool msgPool = new SGMMessagePool();
 
-		Goal parent = new Goal("parentBob", msgPool) {
+		GoalMachine parent = new GoalMachine("parentBob", msgPool) {
 
 			@Override
 			public void doInitialBehaviour() {
@@ -88,8 +88,38 @@ public class Test {
 
 				setBehaviourDone(true);
 			}
+
+			@Override
+			public void checkTriggerCondition() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void checkContextCondition() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void checkActivatedCondition() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void checkPreCondition() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void checkPostCondition() {
+				// TODO Auto-generated method stub
+				
+			}
 		};
-		Goal child = new Goal("childAlice", msgPool) {
+		GoalMachine child = new GoalMachine("childAlice", msgPool) {
 
 			@Override
 			public void doInitialBehaviour() {
@@ -149,7 +179,40 @@ public class Test {
 				setBehaviourDone(true);
 			}
 
+			@Override
+			public void checkTriggerCondition() {
+				System.out.println("Alice is checking triggerCondition...");
+				setTriggerCondition(true);
+			}
+
+			@Override
+			public void checkContextCondition() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void checkActivatedCondition() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void checkPreCondition() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void checkPostCondition() {
+				System.out.println("Alice is checking postCondition...");
+				setPostCondition(true);
+			}
+
 		};
+		child.setTriggerCondition(false);
+		child.setPostCondition(false);
+		
 		parent.addSubElement(child);
 		child.setParentGoal(parent);
 

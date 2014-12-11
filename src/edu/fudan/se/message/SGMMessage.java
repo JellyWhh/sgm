@@ -5,7 +5,6 @@ package edu.fudan.se.message;
 
 import java.io.Serializable;
 
-import edu.fudan.se.goalmodel.Element;
 
 /**
  * 实现线程间的通信的消息格式，是可序列化对象
