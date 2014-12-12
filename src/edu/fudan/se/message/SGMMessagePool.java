@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import edu.fudan.se.goalmodel.Element;
+import edu.fudan.se.goalmachine.Element;
+import edu.fudan.se.goalmachine.SGMMessage;
 
 /**
  * 继承了<code>LinkedBlockingQueue<E></code>

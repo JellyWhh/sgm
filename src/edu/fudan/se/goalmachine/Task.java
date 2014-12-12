@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.fudan.se.goalmodel;
+package edu.fudan.se.goalmachine;
 
 /**
  * @author whh

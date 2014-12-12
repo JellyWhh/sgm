@@ -6,9 +6,9 @@ package test;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import edu.fudan.se.goalmodel.Element;
-import edu.fudan.se.machine.GoalMachine;
-import edu.fudan.se.message.SGMMessage;
+import edu.fudan.se.goalmachine.Element;
+import edu.fudan.se.goalmachine.GoalMachine;
+import edu.fudan.se.goalmachine.SGMMessage;
 import edu.fudan.se.message.SGMMessagePool;
 
 /**

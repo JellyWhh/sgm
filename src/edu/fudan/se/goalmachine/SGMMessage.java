@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.fudan.se.message;
+package edu.fudan.se.goalmachine;
 
 import java.io.Serializable;
 
