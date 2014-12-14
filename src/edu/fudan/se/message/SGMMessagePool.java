@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import edu.fudan.se.goalmachine.Element;
+import edu.fudan.se.goalmachine.ElementMachine;
 import edu.fudan.se.goalmachine.SGMMessage;
 
 /**
@@ -33,7 +33,7 @@ public class SGMMessagePool extends LinkedBlockingQueue<SGMMessage> {
 	 * @throws InterruptedException
 	 *             异常
 	 */
-	public ArrayList<SGMMessage> getMessage(Element receiver)
+	public ArrayList<SGMMessage> getMessage(ElementMachine receiver)
 			throws InterruptedException {
 
 		ArrayList<SGMMessage> ret = new ArrayList<>();
