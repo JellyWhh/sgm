@@ -34,7 +34,8 @@ public class Log {
 
 		String debugFile = "debug.txt";
 		try {
-			String con = goalName + ", " + methodName + ", ---: " + content;
+			String con = "[" + goalName + "] " + methodName + ", LogContent: "
+					+ content;
 			write(debugFile, con);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -57,7 +58,8 @@ public class Log {
 
 		String errorFile = "error.txt";
 		try {
-			String con = goalName + ", " + methodName + ", ---: " + content;
+			String con = "[" + goalName + "] " + methodName + ", LogContent: "
+					+ content;
 			write(errorFile, con);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -84,7 +86,7 @@ public class Log {
 		}
 
 		String content = msg.getHeader() + ", [" + msg.getSender()
-				+ "l send to [" + msg.getReceiver() + "], body is: ["
+				+ "] send to [" + msg.getReceiver() + "], body is: ["
 				+ msg.getBody() + "]. " + result;
 		try {
 			write(messageFile, content);
@@ -126,9 +128,29 @@ public class Log {
 				"yyyy-MM-dd HH:mm:ss");
 		String time = dateFormat.format(nowDate);
 
-		writer.write(time + ": " + content + ".\n");
+		writer.write(time + " " + content + ".\n");
 		writer.close();
 
+	}
+
+	/**
+	 * 清空日志
+	 * 
+	 * @param filePath
+	 *            要清空的文件
+	 * @throws IOException
+	 *             IO异常
+	 */
+	public static void clearLog(String filePath) throws IOException {
+		File file = new File(filePath);
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+
+		FileWriter writer = new FileWriter(filePath, false);// 从开始写，即清空
+
+		writer.write("");
+		writer.close();
 	}
 
 }

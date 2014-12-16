@@ -113,9 +113,11 @@ public abstract class TaskMachine extends ElementMachine {
 					"get a message from " + msg.getSender() + "; body is: "
 							+ msg.getBody());
 
-			if (msg.getBody().equals("END")) {
+			if (msg.getBody().equals("END")) {	//收到外部UI的END消息
 				this.setCurrentState(this.transition(State.Executing,
 						this.getPostCondition()));
+			}else if (msg.getBody().equals("SUSPEND")) {	//收到父目标的SUSPEND消息
+				this.setCurrentState(State.Suspended);
 			}
 		}
 	}

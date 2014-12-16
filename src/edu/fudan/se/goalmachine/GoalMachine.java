@@ -176,6 +176,49 @@ public abstract class GoalMachine extends ElementMachine {
 	}
 
 	/**
+	 * progressChecking状态中do所做的action：只要收到subElement发来的ACHIEVEDDONE消息就进入这个状态，
+	 * 然后检查是不是符合自身进入achieved状态的条件，如果符合，跳转到achieved，如果不符合，跳回到executing状态。<br>
+	 * AND分解检查条件：所有的subElements都achieved<br>
+	 * OR分解检查条件：只要有一个subElement进入achieved
+	 */
+	@Override
+	public void progressCheckingDo() {
+		Log.logDebug(this.getName(), "progressCheckingDo()", "init.");
+		// TODO
+		if (this.getDecomposition() == 0) {	//AND分解
+			// 检查是否全部已完成
+			int count = 0;
+			for (ElementMachine element : this.getSubElements()) {
+				if (element.getRecordedState() == State.Achieved) { // achieved
+					count++;
+				}
+			}
+			
+			if (this.getSchedulerMethod() == 0) {	//并行
+				if (count == this.getSubElements().size()) { // 全部激活,自己可以尝试发生跳转到achieved
+					this.setCurrentState(this.transition(State.ProgressChecking,
+							this.getPostCondition()));
+				}else{
+					this.setCurrentState(State.Executing);	//没有全部激活，继续跳回到executing
+				}
+					
+			}else {	//串行
+				if (count == this.getSubElements().size()) { // 全部激活,自己可以尝试发生跳转到achieved
+					this.setCurrentState(this.transition(State.ProgressChecking,
+							this.getPostCondition()));
+				} else {
+					isSendMesToOneSubDone = false; // 这样下次循环的时候就会再次去执行executingEntry_AND_SERIAL()
+					this.setCurrentState(State.Executing);	//没有全部激活，继续跳回到executing
+				}
+			}
+			
+		}else {	//OR分解
+			this.setCurrentState(this.transition(State.ProgressChecking,
+					this.getPostCondition()));
+		}
+	}
+
+	/**
 	 * suspended状态中entry所做的action：给所有subElements发送SUSPEND消息
 	 */
 	@Override
@@ -308,20 +351,7 @@ public abstract class GoalMachine extends ElementMachine {
 			} else if (msg.getBody().equals("FAILED")) { // 子目标反馈的是FAILED消息
 				setSubElementRecordedState(msg.getSender(), msg.getBody());
 				if (this.getDecomposition() == 0) { // AND分解，向父目标反馈FAILED，同时自己failed
-					if (this.getParentGoal() != null) { // 不是root goal，有parent
-														// goal
-						if (this.sendMessageToParent("FAILED")) {
-							Log.logDebug(this.getName(),
-									"activatedDo_waitingSubReply()",
-									"send FAILED msg to parent.");
-							isActivatedDo_waitingSubReplyDone = true;
-						} else {
-							Log.logError(this.getName(),
-									"activatedDo_waitingSubReply()",
-									"send FAILED msg to parent error!");
-						}
-
-					}
+					// 进入failed状态，在failedEntry()里会向父目标反馈failed消息的
 					this.setCurrentState(State.Failed);
 
 				} else { // OR分解
@@ -338,21 +368,7 @@ public abstract class GoalMachine extends ElementMachine {
 					}
 					if (noinitialCount == this.getSubElements().size()) {// 所有的subElements都不是Initial，也就是收到了所有subElements的回复
 						if (failedCount == this.getSubElements().size()) { // 全部失败
-							if (this.getParentGoal() != null) { // 不是root
-																// goal，有parent
-																// goal
-								if (this.sendMessageToParent("FAILED")) {
-									Log.logDebug(this.getName(),
-											"activatedDo_waitingSubReply()",
-											"send FAILED msg to parent.");
-									isActivatedDo_waitingSubReplyDone = true;
-								} else {
-									Log.logError(this.getName(),
-											"activatedDo_waitingSubReply()",
-											"send FAILED msg to parent error!");
-								}
-
-							}
+							// 进入failed状态
 							this.setCurrentState(State.Failed);
 						} else { // 不是全部失败，表示只要有一个被成功激活，就可以表示自身激活了
 							if (this.getParentGoal() != null) { // 不是root
@@ -428,18 +444,18 @@ public abstract class GoalMachine extends ElementMachine {
 				if (element.getRecordedState() != State.Achieved) { // 5表示是完成状态
 
 					if (sendMessageToSub(element, "START")) {
-						Log.logError(
+						Log.logDebug(
 								this.getName(),
 								"executingEntryDo_sendMesToOneSub_AND_SERIAL()",
 								"send START msg to " + element.getName()
-										+ "succeed!");
+										+ " succeed!");
 						break;
 					} else {
 						Log.logError(
 								this.getName(),
 								"executingEntryDo_sendMesToOneSub_AND_SERIAL()",
 								"send START msg to " + element.getName()
-										+ "error!");
+										+ " error!");
 					}
 
 				}
@@ -469,13 +485,13 @@ public abstract class GoalMachine extends ElementMachine {
 						Log.logDebug(this.getName(),
 								"executingEntryDo_sendMesToOneSub_OR()",
 								"send START msg to " + element.getName()
-										+ "succeed!");
+										+ " succeed!");
 						break;
 					} else {
 						Log.logError(this.getName(),
 								"executingEntryDo_sendMesToOneSub_OR()",
 								"send START msg to " + element.getName()
-										+ "error!");
+										+ " error!");
 					}
 				}
 			}
@@ -490,7 +506,8 @@ public abstract class GoalMachine extends ElementMachine {
 	/**
 	 * AND分解而且是并行<br>
 	 * executing状态中do所做的action：等待所有subElements反馈消息ACHIEVED，必须是所有的子目标都反馈完成，
-	 * 如果所有子目标都完成了，自己可以尝试发生跳转到achieved
+	 * 如果所有子目标都完成了，自己可以尝试发生跳转到achieved；<br>
+	 * 如果得到的反馈消息是FAILED，直接进入failed状态
 	 */
 	private void executingDo_waitingSubReply_AND_PARALLERL() {
 		Log.logDebug(this.getName(),
@@ -504,18 +521,23 @@ public abstract class GoalMachine extends ElementMachine {
 							+ msg.getBody());
 			// 如果子目标反馈的是ACHIEVED
 			if (msg.getBody().equals("ACHIEVEDDONE")) {
+				// TODO
 				setSubElementRecordedState(msg.getSender(), msg.getBody());
-				// 检查是否全部已完成
-				int count = 0;
-				for (ElementMachine element : this.getSubElements()) {
-					if (element.getRecordedState() == State.Achieved) { // achieved
-						count++;
-					}
-				}
-				if (count == this.getSubElements().size()) { // 全部激活,自己可以尝试发生跳转到achieved
-					this.setCurrentState(this.transition(State.Executing,
-							this.getPostCondition()));
-				}
+//				// 检查是否全部已完成
+				this.setCurrentState(State.ProgressChecking);
+//				int count = 0;
+//				for (ElementMachine element : this.getSubElements()) {
+//					if (element.getRecordedState() == State.Achieved) { // achieved
+//						count++;
+//					}
+//				}
+//				if (count == this.getSubElements().size()) { // 全部激活,自己可以尝试发生跳转到achieved
+//					this.setCurrentState(this.transition(State.Executing,
+//							this.getPostCondition()));
+//				}
+			} else if (msg.getBody().equals("FAILED")) {
+				setSubElementRecordedState(msg.getSender(), msg.getBody());
+				this.setCurrentState(State.Failed);
 			}
 
 		}
@@ -526,7 +548,8 @@ public abstract class GoalMachine extends ElementMachine {
 	 * AND分解而且是串行<br>
 	 * executing状态中do所做的action：等待subElement反馈完成的消息，得到消息后，把它标记为achieved，
 	 * 然后重新进入SendMesToOneSub_AND_SERIAL，给下个未完成状态的subElement发消息
-	 * ，如此循环，直到最后一个subElement完成，可以尝试发生跳转。
+	 * ，如此循环，直到最后一个subElement完成，可以尝试发生跳转。<br>
+	 * 如果得到的反馈消息是FAILED，直接进入failed状态
 	 */
 	private void executingDo_waitingSubReply_AND_SERIAL() {
 		Log.logDebug(this.getName(),
@@ -540,21 +563,26 @@ public abstract class GoalMachine extends ElementMachine {
 							+ msg.getBody());
 			// 如果子目标反馈的是ACHIEVED
 			if (msg.getBody().equals("ACHIEVEDDONE")) {
+				// TODO
 				setSubElementRecordedState(msg.getSender(), msg.getBody());
 				// 检查是不是所有的都已完成
-				int count = 0;
-				for (ElementMachine element : this.getSubElements()) {
-					if (element.getRecordedState() == State.Achieved) { // achieved
-						count++;
-					}
-				}
-				if (count == this.getSubElements().size()) { // 全部激活,自己可以尝试发生跳转到achieved
-					this.setCurrentState(this.transition(State.Executing,
-							this.getPostCondition()));
-				} else {
-					isSendMesToOneSubDone = false; // 这样下次循环的时候就会再次去执行executingEntry_AND_SERIAL()
-				}
-			} 
+				this.setCurrentState(State.ProgressChecking);
+//				int count = 0;
+//				for (ElementMachine element : this.getSubElements()) {
+//					if (element.getRecordedState() == State.Achieved) { // achieved
+//						count++;
+//					}
+//				}
+//				if (count == this.getSubElements().size()) { // 全部激活,自己可以尝试发生跳转到achieved
+//					this.setCurrentState(this.transition(State.Executing,
+//							this.getPostCondition()));
+//				} else {
+//					isSendMesToOneSubDone = false; // 这样下次循环的时候就会再次去执行executingEntry_AND_SERIAL()
+//				}
+			} else if (msg.getBody().equals("FAILED")) {
+				setSubElementRecordedState(msg.getSender(), msg.getBody());
+				this.setCurrentState(State.Failed);
+			}
 
 		}
 
@@ -575,11 +603,13 @@ public abstract class GoalMachine extends ElementMachine {
 			Log.logDebug(this.getName(), "executingDo_waitingSubReply_OR()",
 					"get a message from " + msg.getSender() + "; body is: "
 							+ msg.getBody());
-			// 如果子目标反馈的是ACHIEVED
-			if (msg.getBody().equals("ACHIEVEDDONE")) {
+
+			if (msg.getBody().equals("ACHIEVEDDONE")) { // 如果子目标反馈的是ACHIEVED
+				// TODO
 				setSubElementRecordedState(msg.getSender(), msg.getBody());
-				this.setCurrentState(this.transition(State.Executing,
-						this.getPostCondition()));
+				this.setCurrentState(State.ProgressChecking);
+//				this.setCurrentState(this.transition(State.Executing,
+//						this.getPostCondition()));
 			} else if (msg.getBody().equals("WAITING")) {
 				setSubElementRecordedState(msg.getSender(), msg.getBody());
 				int count = 0;
@@ -614,8 +644,52 @@ public abstract class GoalMachine extends ElementMachine {
 						}
 					}
 				}
+			} else if (msg.getBody().equals("FAILED")) {
+				// 收到failed消息后，先检查是否所有的subElements都是failed状态，如果是那么自身直接进入failed状态
+				setSubElementRecordedState(msg.getSender(), msg.getBody());
+				int count = 0;
+				for (ElementMachine element : this.getSubElements()) {
+					if (element.getRecordedState() == State.Failed) {
+						count++;
+					}
+				}
+				if (count == this.getSubElements().size()) { // 全部是Failed状态
+					isSendMesToOneSubDone = true;
+					this.setCurrentState(State.Failed); // 进入failed状态
+				} else {
+					// 重新开始执行executingEntryDo_sendMesToOneSub_OR()，给下个处于激活状态的subElement发送START消息
+					isSendMesToOneSubDone = false;
+				}
 			}
 
+		}
+	}
+
+	/**
+	 * 停止运行当前machine：另外，要给所有subElements里面不是Failed或者Achieved状态的子目标发送STOP消息
+	 */
+	public void stopMachine() {
+		this.setFinish(true);
+
+		if (this.getSubElements() != null) {
+			// 给所有subElements里面不是Failed状态或者Achieved状态的目标发送STOP消息
+			for (ElementMachine element : this.getSubElements()) {
+				if (element.getRecordedState() != State.Failed
+						&& element.getRecordedState() != State.Achieved) {
+					if (sendMessageToSub(element, "STOP")) {
+						Log.logDebug(this.getName(), "stopMachine()",
+								"send STOP msg to " + element.getName()
+										+ " succeed!");
+					} else {
+						Log.logError(this.getName(), "stopMachine()",
+								"send STOP msg to " + element.getName()
+										+ " error!");
+					}
+				}
+			}
+		} else {
+			Log.logError(this.getName(), "stopMachine()",
+					"getSubElements() == null!");
 		}
 	}
 
@@ -701,9 +775,9 @@ public abstract class GoalMachine extends ElementMachine {
 
 			@Override
 			public int compare(ElementMachine e1, ElementMachine e2) {
-				if (e1.getPriorityLevel() > e2.getPriorityLevel()) {
+				if (e1.getPriorityLevel() < e2.getPriorityLevel()) {
 					return 1;
-				} else if (e1.getPriorityLevel() < e2.getPriorityLevel()) {
+				} else if (e1.getPriorityLevel() > e2.getPriorityLevel()) {
 					return -1;
 				} else {
 					return 0;
