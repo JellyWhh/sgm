@@ -12,7 +12,7 @@ package edu.fudan.se.goalmachine;
 public class Condition {
 
 	private String type; // 条件类型，具体有CONTEXT,PRE,POST,COMMITMENT,INVARIANT
-	boolean satisfied; // 条件是否被满足，true为被满足
+	boolean satisfied = true; // 条件是否被满足，true为被满足
 	
 	public Condition(String type){
 		this.type = type;

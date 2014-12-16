@@ -32,7 +32,7 @@ public class Log {
 	public static void logDebug(String goalName, String methodName,
 			String content) {
 
-		String debugFile = "/debug.txt";
+		String debugFile = "debug.txt";
 		try {
 			String con = goalName + ", " + methodName + ", ---: " + content;
 			write(debugFile, con);
@@ -55,7 +55,7 @@ public class Log {
 	public static void logError(String goalName, String methodName,
 			String content) {
 
-		String errorFile = "/error.txt";
+		String errorFile = "error.txt";
 		try {
 			String con = goalName + ", " + methodName + ", ---: " + content;
 			write(errorFile, con);
@@ -74,7 +74,7 @@ public class Log {
 	 *            消息是否发送成功
 	 */
 	public static void logMessage(SGMMessage msg, boolean success) {
-		String messageFile = "/message.txt";
+		String messageFile = "message.txt";
 
 		String result = "";
 		if (success) {

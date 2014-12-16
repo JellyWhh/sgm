@@ -26,9 +26,11 @@ public abstract class ElementMachine implements Runnable {
 
 	private BlockingQueue<SGMMessage> msgPool; // 消息队列，即消息池，可以直观理解为当前element的个人信箱
 
-	private int recordedState; // 让父目标用来记录当前element的状态
+	private State recordedState = State.Initial; // 让父目标用来记录当前element的状态
+	private int priorityLevel; // 让父目标用来记录当前element的优先级
 
 	private Date startTime; // 当前element machine开始执行时的时间
+	private int timeLimit; // 完成这个任务的时间限制，单位为小时h
 
 	private boolean finish; // 标识当前machine是否运行结束，结束后run()里面的while循环将停止
 
@@ -38,6 +40,19 @@ public abstract class ElementMachine implements Runnable {
 	private Condition postCondition; // 可以为null
 	private Condition commitmentCondition = new Condition("COMMITMENT"); // 整个shouldDo符合状态里都有可能不满足的，要一直检查
 	private Condition invariantCondition = new Condition("INVARIANT"); // 整个shouldDo符合状态里都有可能不满足的，要一直检查
+
+	private Condition conditionCauseToRepairing;
+
+	/* 标记各种状态的entry动作是否完成 */
+	boolean isInitialEntryDone = false;
+	boolean isActivatedEntryDone = false;
+	boolean isExecutingEntryDone = false;
+	boolean isFailedEntryDone = false;
+	boolean isAchievedEntryDone = false;
+	boolean isWaitingEntryDone = false;
+	boolean isSuspendedEntryDone = false;
+	boolean isProgressCheckingEntryDone = false;
+	boolean isRepairingEntryDone = false;
 
 	/**
 	 * 构造方法
@@ -53,6 +68,124 @@ public abstract class ElementMachine implements Runnable {
 		this.msgPool = new LinkedBlockingQueue<SGMMessage>();
 	}
 
+	@Override
+	public void run() {
+
+		this.setCurrentState(State.Initial); // 刚开始是目标状态是initial状态
+		// this.setStartTime(new Date()); // 设置目标状态机开始运行时间为当前时间
+
+		Log.logDebug(this.name, "run()", "ElementMachine start!");
+
+		this.setFinish(false);
+		while (!this.isFinish()) {
+			// 如果contextCondition为空，表示没有设置上下文条件，这个goal是有意义的，可以检出消息，执行行为
+			doMainRunningBehaviour();
+			try {
+				Thread.sleep(2 * 1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		Log.logDebug(this.getName(), "run()",
+				"ElementMachine stop while cycling!");
+	}
+
+	/**
+	 * 主体持续运行的行为，包括从消息池里检出消息，以及在对应的状态执行相应的行为
+	 */
+	private void doMainRunningBehaviour() {
+
+		switch (this.getCurrentState()) {
+		case Initial: // initial
+			if (isInitialEntryDone) { // 如果完成了entry动作，循环执行do动作
+				initialDo();
+			} else {
+				initialEntry(); // entry动作只会执行一次
+				isInitialEntryDone = true; // 设置为true表示这个entry动作做完了，以后不会再执行了
+			}
+
+			break;
+		case Activated: // activated
+			doCCandInvCChecking();
+
+			if (isActivatedEntryDone) { // 自己激活后就等待父目标的Start指令
+				activateDo();
+			} else { // 刚进入激活状态，尝试把自己状态转换为激活
+				activatedEntry();
+				isActivatedEntryDone = true; // 设置为true表示这个entry动作做完了，以后不会再执行了
+			}
+
+			break;
+		case Waiting:// waiting
+			doCCandInvCChecking();
+
+			if (isWaitingEntryDone) {
+				waitingDo();
+			} else {
+				waitingEntry();
+				isWaitingEntryDone = true;
+			}
+			break;
+		case Executing: // executing
+			doCCandInvCChecking();
+
+			if (isExecutingEntryDone) {
+				// 先检查一下是否有SUSPEND消息到达
+				checkIfSuspend();
+				executingDo();
+			} else {
+				executingEntry();
+				isExecutingEntryDone = true;
+			}
+
+			break;
+		case Suspended: // suspened
+			doCCandInvCChecking();
+
+			if (isSuspendedEntryDone) {
+				suspendedDo();
+			} else {
+				suspendedEntry();
+				isSuspendedEntryDone = true;
+			}
+			break;
+		case Repairing: // repairing
+			if (isRepairingEntryDone) {
+				repairingDo();
+			} else {
+				repairingEntry();
+				isRepairingEntryDone = true;
+			}
+			break;
+		case ProgressChecking: // progressChecking
+			if (isProgressCheckingEntryDone) {
+				progressCheckingDo();
+			} else {
+				progressCheckingEntry();
+				isProgressCheckingEntryDone = true;
+			}
+			break;
+		case Failed:// failed
+			if (isFailedEntryDone) {
+				failedDo();
+			} else {
+				failedEntry();
+				isFailedEntryDone = true;
+			}
+			break;
+		case Achieved:// achieved
+			if (isAchievedEntryDone) {
+				achievedDo();
+			} else {
+				achievedEntry();
+				isAchievedEntryDone = true; // 设置为true表示这个entry动作做完了，以后不会再执行了
+			}
+
+			break;
+
+		}
+	}
+
 	// ***********************************************
 	// 下面的方法都是在各个状态下entry和do部分做的action
 	// ***********************************************
@@ -62,51 +195,189 @@ public abstract class ElementMachine implements Runnable {
 	 * 只会执行一次
 	 */
 	public void initialEntry() {
-		// TODO
-		// isInitialEntryDone = true; // 设置为true表示这个entry动作做完了，以后不会再执行了
+		Log.logDebug(this.getName(), "initialEntry()", "init.");
+		this.setStartTime(new Date()); // setTimer
 	}
 
 	/**
 	 * initial状态的do所做的action：监听消息池，看是否有ACTIVATE消息到达
 	 */
 	public void initialDo() {
+		Log.logDebug(this.getName(), "initialDo()", "init.");
 		SGMMessage msg = this.getMsgPool().poll(); // 每次拿出一条消息
 		if (msg != null) {
 			Log.logDebug(
 					this.name,
 					"initialDo()",
-					"get a msg from" + msg.getSender() + ", body is: "
+					"get a msg from " + msg.getSender() + ", body is: "
 							+ msg.getBody());
 
 			// 收到消息后的行为处理
 			if (msg.getBody().equals("ACTIVATE")) {
-				// TODO
 				this.setCurrentState(transition(State.Initial,
-						getContextCondition()));
+						this.getContextCondition()));
 			}
 		}
 	}
 
 	/**
-	 * activated状态中do所做的action：自身不是root goal，所以要一直等待父目标的START指令，收到后才可以发生状态转换
+	 * activated状态中entry所做的action，子类需要重写
 	 */
-	public void activateDo_waitingParentNotify() {
-		Log.logDebug(this.getName(), "activateDo_waitingParentNotify()",
-				"init.");
+	public void activatedEntry() {
 
-		SGMMessage msg = this.getMsgPool().poll(); // 每次拿出一条消息
+	}
+
+	/**
+	 * activated状态中do所做的action：自身不是root goal，所以要一直等待父目标的START指令，收到后才可以发生状态转换<br>
+	 * <code>GoalMachine中需要重写</code>
+	 */
+	public void activateDo() {
+
+	}
+
+	/**
+	 * waiting状态中entry所做的action：告诉父目标自己进入了Waiting状态
+	 */
+	public void waitingEntry() {
+		Log.logDebug(this.getName(), "waitingEntry()", "init.");
+		// 先告诉父目标自己进入executing状态了
+		if (this.getParentGoal() != null) {
+			if (sendMessageToParent("WAITING")) {
+				Log.logDebug(this.getName(), "waitingEntry()",
+						"send WAITING msg to parent succeed!");
+			} else {
+				Log.logError(this.getName(), "waitingEntry()",
+						"send WAITING msg to parent error!");
+			}
+		}
+	}
+
+	/**
+	 * waiting状态中do所做的action：等待父目标的EXITWAITING消息，并且一直做checkPreCondition
+	 */
+	public void waitingDo() {
+		Log.logDebug(this.getName(), "waitingDo()", "init.");
+		// 先判断是否有父目标的EXITWAITING消息
+		SGMMessage msg = this.getMsgPool().poll(); // 拿出一条消息
 		if (msg != null) {
-			Log.logDebug(this.getName(), "activateDo_waitingParentNotify()",
+			Log.logDebug(this.getName(), "waitingDo()", "get a message from "
+					+ msg.getSender() + "; body is: " + msg.getBody());
+			if (msg.getBody().equals("EXITWAITING")) {
+				this.setCurrentState(State.Activated);// 跳转到激活状态，等待新的Start指令
+			}
+		}
+		// 然后再做条件检查，判断是否能够跳出waiting状态
+		checkPreCondition();
+		if (this.getPreCondition().satisfied) {
+			this.setCurrentState(State.Executing);
+		}
+
+	}
+
+	/**
+	 * executing状态中entry所做的action：需要重写
+	 */
+	public void executingEntry() {
+
+	}
+
+	/**
+	 * executing状态中do所做的action：需要重写
+	 */
+	public void executingDo() {
+
+	}
+
+	/**
+	 * 在executingDo()方法前面先调用的方法，用来检测是否有收到SUSPEND消息，如果收到了，就把状态跳转到Suspended
+	 */
+	private void checkIfSuspend() {
+		Log.logDebug(this.getName(), "checkIfSuspend()", "init.");
+
+		// 这里用peek()方法取消息，Retrieves, but does not
+		// remove，这样就不会影响接下来的executingDo()方法中取消息了
+		SGMMessage msg = this.getMsgPool().peek(); // 每次拿出一条消息
+		if (msg != null) {
+			Log.logDebug(this.getName(), "checkIfSuspend()",
 					"get a message from " + msg.getSender() + "; body is: "
 							+ msg.getBody());
 
-			// 消息内容是START，表示父目标让当前目标开始状态转换
-			if (msg.getBody().equals("START")) {
-				this.setCurrentState(this.transition(State.Activated,
-						this.getPreCondition()));
+			// 消息内容是SUSPEND，表示父目标让当前目标进入挂起
+			if (msg.getBody().equals("SUSPEND")) {
+				this.getMsgPool().poll(); // 如果消息真的是SUSPEND，那么就把它拿出来
+				this.setCurrentState(State.Suspended);
 			}
 
 		}
+	}
+
+	/**
+	 * suspended状态中entry所做的action：需要重写
+	 */
+	public void suspendedEntry() {
+
+	}
+
+	/**
+	 * suspended状态中do所做的action：需要重写
+	 */
+	public void suspendedDo() {
+
+	}
+
+	/**
+	 * repairing状态中entry所做的action：
+	 */
+	public void repairingEntry() {
+
+	}
+
+	/**
+	 * repairing状态中do所做的action：尝试从Repairing状态跳转到修复后的状态，
+	 * 修复后的状态在transiton中会通过调用doRepairing(condition)得到
+	 */
+	public void repairingDo() {
+		Log.logDebug(this.getName(), "repairingDo()", "init.");
+		this.setCurrentState(this.transition(State.Repairing,
+				this.getConditionCauseToRepairing()));
+	}
+
+	/**
+	 * progressChecking状态中entry所做的action：
+	 */
+	public void progressCheckingEntry() {
+
+	}
+
+	/**
+	 * progressChecking状态中do所做的action：
+	 */
+	public void progressCheckingDo() {
+
+	}
+
+	/**
+	 * failed状态中entry所做的action：告诉父目标自己FAILED
+	 */
+	public void failedEntry() {
+		Log.logDebug(this.getName(), "failedEntry()", "init.");
+		// 先告诉父目标自己进入executing状态了
+		if (this.getParentGoal() != null) {
+			if (sendMessageToParent("FAILED")) {
+				Log.logDebug(this.getName(), "failedEntry()",
+						"send FAILED msg to parent succeed!");
+			} else {
+				Log.logError(this.getName(), "failedEntry()",
+						"send FAILED msg to parent error!");
+			}
+		}
+	}
+
+	/**
+	 * failed状态中do所做的action：
+	 */
+	public void failedDo() {
+
 	}
 
 	/**
@@ -114,7 +385,6 @@ public abstract class ElementMachine implements Runnable {
 	 * goal，就不用发送了，直接标记整个goal model完成
 	 */
 	public void achievedEntry() {
-		// TODO
 		Log.logDebug(this.getName(), "achievedEntry()", "init.");
 
 		if (this.getParentGoal() != null) { // 不是root goal
@@ -122,12 +392,12 @@ public abstract class ElementMachine implements Runnable {
 				this.stopMachine(); // 本身已完成
 				// isAchievedEntryDone = true; // 设置为true表示这个entry动作做完了，以后不会再执行了
 				Log.logDebug(this.getName(), "achievedEntry()",
-						"send msg to parent succeed!");
+						"send ACHIEVEDDONE msg to parent succeed!");
 				Log.logDebug(this.getName(), "achievedEntry()",
 						"It has achieved its goal and begins to stop its machine");
 			} else {
 				Log.logError(this.getName(), "achievedEntry()",
-						"send msg to parent error!");
+						"send ACHIEVEDDONE msg to parent error!");
 			}
 		} else {
 			this.stopMachine(); // 本身已完成
@@ -135,6 +405,13 @@ public abstract class ElementMachine implements Runnable {
 			Log.logDebug(this.getName(), "achievedEntry()",
 					"It has achieved its goal and begins to stop its machine");
 		}
+
+	}
+
+	/**
+	 * achieved状态中do所做的action：
+	 */
+	public void achievedDo() {
 
 	}
 
@@ -154,53 +431,101 @@ public abstract class ElementMachine implements Runnable {
 	 * @return 转换后的状态
 	 */
 	public State transition(State currentState, Condition condition) {
-		// TODO
+		
 		State ret = currentState;
 
 		switch (currentState) {
 		case Initial: // (initial)
 			// 先判断条件是不是context condition，是的话执行检查然后根据结果进行跳转；如果不是，无意义，返回-1，
 			if (condition.getType().equals("CONTEXT")) {
+				// 先检查一下context condition，在方法里面通过判断是否满足然后对conditon赋值
+				checkContextCondition();
 				if (condition.isSatisfied()) {
 					ret = State.Activated; // context
-											// condition满足，跳转到1(activated)
+											// condition满足，跳转到Activated
 				} else {
-					ret = State.Waiting; // context condition不满足，跳转到3(waiting)
+					ret = State.Repairing; // context condition不满足，跳转到Repairing
+					this.setConditionCauseToRepairing(condition);
 				}
 			}
 			break;
+
 		case Activated: // 1(activated)
 			// 先判断条件是不是pre condition，是的话执行检查然后根据结果进行跳转；如果不是，无意义，返回-1
-			if (condition.getType().equals("PRE")) {
-				if (condition.isSatisfied()) {
-					ret = State.Executing; // pre condition满足，跳转到2(executing)
-				} else {
-					ret = State.Waiting; // pre condition不满足，跳转到3(waiting)
+			if (condition == null) { // pre condition为空
+				ret = State.Executing; // 直接跳转到Executing
+			} else {
+				if (condition.getType().equals("PRE")) {
+					checkPreCondition();
+					if (condition.isSatisfied()) {
+						ret = State.Executing; // pre condition满足，跳转到Executing
+					} else {
+						ret = State.Waiting; // pre condition不满足，跳转到Waiting
+					}
 				}
 			}
 			break;
 
 		case Executing: // (executing)
 			// 先判断条件是不是post condition，是的话执行检查然后根据结果进行跳转；如果不是，无意义，返回-1
-			if (condition.getType().equals("POST")) {
-				if (condition.isSatisfied()) {
-					ret = State.Achieved; // post condition满足，跳转到5(achieved)
-				} else {
-					ret = State.Waiting; // post condition不满足，跳转到3(waiting)
+			if (condition == null) { // post condition为空
+				ret = State.Achieved; // 直接跳转到Achieved
+			} else {
+				if (condition.getType().equals("POST")) {
+					checkPostCondition();
+					if (condition.isSatisfied()) {
+						ret = State.Achieved; // post condition满足，跳转到Achieved
+					} else {
+						ret = State.Repairing; // post condition不满足，跳转到Repairing
+						this.setConditionCauseToRepairing(condition);
+					}
 				}
 			}
 			break;
-		case Repairing: // 3(repairing)
-			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			// TODO
+
+		case Repairing:
+			ret = doRepairing(condition);
+			break;
+			
+		default:
 			break;
 
-		default:
-			ret = null;
-			break;
+		}
+		return ret;
+	}
+
+	/**
+	 * 根据不同的策略进行修复，修复成功后仍然是根据不同的策略跳转到不同的状态
+	 * 
+	 * @param condition
+	 *            违反的条件
+	 * @return 修复结束后要跳转到的状态
+	 */
+	public abstract State doRepairing(Condition condition);
+
+	/**
+	 * 在ShouldDo复合状态中队commitment condition和invariant
+	 * condition进行检查，如果违反，跳到repairing状态，并设置ConditionCauseToRepairing
+	 */
+	public void doCCandInvCChecking() {
+
+		checkCommitmentCondition();
+		if (!this.getCommitmentCondition().satisfied) {
+			Log.logDebug(this.getName(), "doCCandInvCChecking()",
+					"commitment condition violation is detected!!!");
+			this.setCurrentState(State.Repairing);
+			this.setConditionCauseToRepairing(this.getCommitmentCondition());
+			return;
 		}
 
-		return ret;
+		checkInvariantCondition();
+		if (!this.getInvariantCondition().satisfied) {
+			Log.logDebug(this.getName(), "doCCandInvCChecking()",
+					"invariant condition violation is detected!!!");
+			this.setCurrentState(State.Repairing);
+			this.setConditionCauseToRepairing(this.getInvariantCondition());
+			return;
+		}
 	}
 
 	/**
@@ -280,12 +605,20 @@ public abstract class ElementMachine implements Runnable {
 		this.msgPool = msgPool;
 	}
 
-	public int getRecordedState() {
+	public State getRecordedState() {
 		return recordedState;
 	}
 
-	public void setRecordedState(int recordedState) {
+	public void setRecordedState(State recordedState) {
 		this.recordedState = recordedState;
+	}
+
+	public int getPriorityLevel() {
+		return priorityLevel;
+	}
+
+	public void setPriorityLevel(int priorityLevel) {
+		this.priorityLevel = priorityLevel;
 	}
 
 	public Date getStartTime() {
@@ -294,6 +627,14 @@ public abstract class ElementMachine implements Runnable {
 
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
+	}
+
+	public int getTimeLimit() {
+		return timeLimit;
+	}
+
+	public void setTimeLimit(int timeLimit) {
+		this.timeLimit = timeLimit;
 	}
 
 	public boolean isFinish() {
@@ -350,6 +691,14 @@ public abstract class ElementMachine implements Runnable {
 
 	public void setInvariantCondition(Condition invariantCondition) {
 		this.invariantCondition = invariantCondition;
+	}
+
+	public Condition getConditionCauseToRepairing() {
+		return conditionCauseToRepairing;
+	}
+
+	public void setConditionCauseToRepairing(Condition conditionCauseToRepairing) {
+		this.conditionCauseToRepairing = conditionCauseToRepairing;
 	}
 
 }
