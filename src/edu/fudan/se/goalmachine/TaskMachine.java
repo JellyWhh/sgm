@@ -74,25 +74,7 @@ public abstract class TaskMachine extends ElementMachine {
 		}
 	}
 
-	/**
-	 * executing状态中entry所做的action：给父目标发一个STARTEXECUTING消息<br>
-	 * 主要是在OR分解中用，以防有其他目标处于waiting状态，
-	 * 父目标收到STARTEXECUTING后就可以把其他waiting状态的取消waiting了
-	 */
-	@Override
-	public void executingEntry() {
-		Log.logDebug(this.getName(), "executingEntry()", "init.");
-		// 先告诉父目标自己进入executing状态了
-		if (this.getParentGoal() != null) {
-			if (sendMessageToParent("STARTEXECUTING")) {
-				Log.logDebug(this.getName(), "executingEntry()",
-						"send STARTEXECUTING msg to parent succeed!");
-			} else {
-				Log.logError(this.getName(), "executingEntry()",
-						"send STARTEXECUTING msg to parent error!");
-			}
-		}
-	}
+	
 
 	/**
 	 * executing状态中do所做的action：这个需要根据具体的task有不同的具体执行行为，所以这个是抽象方法，在实例化时具体实现

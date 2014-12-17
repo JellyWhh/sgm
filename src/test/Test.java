@@ -3,6 +3,8 @@
  */
 package test;
 
+import java.util.Date;
+
 import edu.fudan.se.goalmachine.Condition;
 import edu.fudan.se.goalmachine.GoalMachine;
 import edu.fudan.se.goalmachine.SGMMessage;
@@ -25,6 +27,10 @@ public class Test {
 
 			@Override
 			public State doRepairing(Condition condition) {
+				if (condition.getType().equals("COMMITMENT")) {
+					// this.setTimeLimit(60 * 60); // 60分钟
+					return State.Failed;
+				}
 				// TODO Auto-generated method stub
 				return null;
 			}
@@ -55,8 +61,15 @@ public class Test {
 
 			@Override
 			public void checkCommitmentCondition() {
-				// TODO Auto-generated method stub
-
+				Date nowTime = new Date();
+				long runningTime = nowTime.getTime()
+						- this.getStartTime().getTime(); // 得到的差值单位是毫秒
+				// TODO 这里记得可能要在*1000前面加上*60，因为现在设的等待时间限制单位为秒，实际运行时可能需要设置为分钟
+				if (runningTime > (this.getTimeLimit() * 1000)) { // 超时
+					this.getCommitmentCondition().setSatisfied(false);
+				} else {
+					this.getCommitmentCondition().setSatisfied(true);
+				}
 			}
 		};
 
@@ -404,9 +417,13 @@ public class Test {
 				this.executingDo_waitingEnd();
 			}
 		};
+		// root.setCommitmentCondition(new Condition("COMMITMENT"));
+		// root.setTimeLimit(10); // 10S
+
 		aliceChild_1.setContextCondition(new Condition("CONTEXT"));
 		// aliceChild_2.setContextCondition(new Condition("CONTEXT"));
-		bobChild_2.setPreCondition(new Condition("PRE"));
+		bobChild_2.setPreCondition(new Condition("PRE", false));
+		bobChild_2.setWaitingTimeLimit(5);// 5s
 		bobChild_3.setContextCondition(new Condition("CONTEXT"));
 		bobChild_3.setPostCondition(new Condition("POST"));
 
@@ -438,6 +455,120 @@ public class Test {
 		// ExecutorService service = Executors.newCachedThreadPool();
 		// service.execute(parentAlice);
 		// service.execute(childBob);
+		
+		
+		Thread UIThread = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(5 * 1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				SGMMessage msg = new SGMMessage("TOROOT", null, root.getName(),
+						"ACTIVATE");
+				if (root.getMsgPool().offer(msg)) {
+					System.out
+							.println("Main thread sends an ACTIVATE msg to parentAlice.");
+				}
+
+				try {
+					Thread.sleep(20 * 1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				SGMMessage rootSuspendMsg = new SGMMessage("TOROOT", null,
+						root.getName(), "SUSPEND");
+				if (root.getMsgPool().offer(rootSuspendMsg)) {
+					System.out.println("Main thread sends an SUSPEND msg to root.");
+				}
+
+				try {
+					Thread.sleep(35 * 1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				SGMMessage rootResumeMsg = new SGMMessage("TOROOT", null,
+						root.getName(), "RESUME");
+				if (root.getMsgPool().offer(rootResumeMsg)) {
+					System.out.println("Main thread sends an RESUME msg to root.");
+				}
+
+				try {
+					Thread.sleep(10 * 1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				SGMMessage aliceChild1End = new SGMMessage("TOROOT", null,
+						aliceChild_1.getName(), "END");
+				if (aliceChild_1.getMsgPool().offer(aliceChild1End)) {
+					System.out.println("Main thread sends a END msg to aliceChild_1.");
+				}
+
+				try {
+					Thread.sleep(5 * 1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				SGMMessage aliceChild2End = new SGMMessage("TOROOT", null,
+						aliceChild_2.getName(), "END");
+				if (aliceChild_2.getMsgPool().offer(aliceChild2End)) {
+					System.out.println("Main thread sends a END msg to aliceChild_2.");
+				}
+
+				try {
+					Thread.sleep(30 * 1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				SGMMessage bobChild3End = new SGMMessage("TOROOT", null,
+						bobChild_3.getName(), "END");
+				if (bobChild_3.getMsgPool().offer(bobChild3End)) {
+					System.out.println("Main thread sends a END msg to bobChild_3.");
+				}
+
+				try {
+					Thread.sleep(20 * 1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				SGMMessage bobChild2End = new SGMMessage("TOROOT", null,
+						bobChild_2.getName(), "END");
+				if (bobChild_2.getMsgPool().offer(bobChild2End)) {
+					System.out.println("Main thread sends a END msg to bobChild_2.");
+				}
+
+				try {
+					Thread.sleep(10 * 1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				SGMMessage bobChild1End = new SGMMessage("TOROOT", null,
+						bobChild_1.getName(), "END");
+				if (bobChild_1.getMsgPool().offer(bobChild1End)) {
+					System.out.println("Main thread sends a END msg to bobChild_1.");
+				}
+				
+			}
+		});
+
+		
 		rootThread.start();
 		aliceThread.start();
 		bobThread.start();
@@ -446,72 +577,8 @@ public class Test {
 		bobChild_1Thread.start();
 		bobChild_2Thread.start();
 		bobChild_3Thread.start();
-
-		Thread.sleep(5 * 1000);
-		SGMMessage msg = new SGMMessage("TOROOT", null, root.getName(),
-				"ACTIVATE");
-		if (root.getMsgPool().offer(msg)) {
-			System.out
-					.println("Main thread sends an ACTIVATE msg to parentAlice.");
-		}
-
-		Thread.sleep(30 * 1000);
-
-		// SGMMessage msg3 = new SGMMessage("TOROOT", null, root.getName(),
-		// "SUSPEND");
-		// if (root.getMsgPool().offer(msg3)) {
-		// System.out
-		// .println("Main thread sends an SUSPEND msg to parentAlice.");
-		// }
-		//
-		// Thread.sleep(5 * 1000);
-		//
-		// SGMMessage msg4 = new SGMMessage("TOROOT", null, root.getName(),
-		// "RESUME");
-		// if (root.getMsgPool().offer(msg4)) {
-		// System.out
-		// .println("Main thread sends an RESUME msg to parentAlice.");
-		// }
-		//
-		// Thread.sleep(15 * 1000);
-
-		SGMMessage aliceChild1End = new SGMMessage("TOROOT", null,
-				aliceChild_1.getName(), "END");
-		if (aliceChild_1.getMsgPool().offer(aliceChild1End)) {
-			System.out.println("Main thread sends a END msg to aliceChild_1.");
-		}
-
-		Thread.sleep(5 * 1000);
-
-		SGMMessage aliceChild2End = new SGMMessage("TOROOT", null,
-				aliceChild_2.getName(), "END");
-		if (aliceChild_2.getMsgPool().offer(aliceChild2End)) {
-			System.out.println("Main thread sends a END msg to aliceChild_2.");
-		}
-
-		Thread.sleep(30 * 1000);
 		
-		SGMMessage bobChild3End = new SGMMessage("TOROOT", null,
-				bobChild_3.getName(), "END");
-		if (bobChild_3.getMsgPool().offer(bobChild3End)) {
-			System.out.println("Main thread sends a END msg to bobChild_3.");
-		}
-		
-		Thread.sleep(20 * 1000);
-		
-		SGMMessage bobChild2End = new SGMMessage("TOROOT", null,
-				bobChild_2.getName(), "END");
-		if (bobChild_2.getMsgPool().offer(bobChild2End)) {
-			System.out.println("Main thread sends a END msg to bobChild_2.");
-		}
-		
-		Thread.sleep(10 * 1000);
-		
-		SGMMessage bobChild1End = new SGMMessage("TOROOT", null,
-				bobChild_1.getName(), "END");
-		if (bobChild_1.getMsgPool().offer(bobChild1End)) {
-			System.out.println("Main thread sends a END msg to bobChild_1.");
-		}
+		UIThread.start();
 
 	}
 

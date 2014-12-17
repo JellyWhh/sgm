@@ -30,7 +30,10 @@ public abstract class ElementMachine implements Runnable {
 	private int priorityLevel; // 让父目标用来记录当前element的优先级
 
 	private Date startTime; // 当前element machine开始执行时的时间
-	private int timeLimit; // 完成这个任务的时间限制，单位为小时h
+	private int timeLimit; // 完成这个任务的时间限制，单位为分钟minute
+
+	private Date startWaitingTime; // 开始等待的时间
+	private int waitingTimeLimit; // 等待时间限制
 
 	private boolean finish; // 标识当前machine是否运行结束，结束后run()里面的while循环将停止
 
@@ -51,7 +54,6 @@ public abstract class ElementMachine implements Runnable {
 	boolean isAchievedEntryDone = false;
 	boolean isWaitingEntryDone = false;
 	boolean isSuspendedEntryDone = false;
-	boolean isProgressCheckingEntryDone = false;
 	boolean isRepairingEntryDone = false;
 
 	/**
@@ -110,51 +112,63 @@ public abstract class ElementMachine implements Runnable {
 
 				break;
 			case Activated: // activated
-				doCCandInvCChecking();
+				if (doCCandInvCChecking()) { // 检测到违反
+					break;
+				} else {
 
-				if (isActivatedEntryDone) { // 自己激活后就等待父目标的Start指令
-					activateDo();
-				} else { // 刚进入激活状态，尝试把自己状态转换为激活
-					activatedEntry();
-					isActivatedEntryDone = true; // 设置为true表示这个entry动作做完了，以后不会再执行了
+					if (isActivatedEntryDone) { // 自己激活后就等待父目标的Start指令
+						activateDo();
+					} else { // 刚进入激活状态，尝试把自己状态转换为激活
+						activatedEntry();
+						isActivatedEntryDone = true; // 设置为true表示这个entry动作做完了，以后不会再执行了
+					}
 				}
 
 				break;
 			case Waiting:// waiting
-				doCCandInvCChecking();
-
-				if (isWaitingEntryDone) {
-					waitingDo();
+				if (doCCandInvCChecking()) { // 检测到违反
+					break;
 				} else {
-					waitingEntry();
-					isWaitingEntryDone = true;
+
+					if (isWaitingEntryDone) {
+						waitingDo();
+					} else {
+						waitingEntry();
+						isWaitingEntryDone = true;
+					}
 				}
 				break;
 			case Executing: // executing
-				doCCandInvCChecking();
-
-				if (isExecutingEntryDone) {
-					// 先检查一下是否有SUSPEND消息到达
-					if (checkIfSuspend()) { // 需要挂起
-						break;
-					} else { // 不需要挂起
-						executingDo();
-					}
-
+				if (doCCandInvCChecking()) { // 检测到违反
+					break;
 				} else {
-					executingEntry();
-					isExecutingEntryDone = true;
+
+					if (isExecutingEntryDone) {
+						// 先检查一下是否有SUSPEND消息到达
+						if (checkIfSuspend()) { // 需要挂起
+							break;
+						} else { // 不需要挂起
+							executingDo();
+						}
+
+					} else {
+						executingEntry();
+						isExecutingEntryDone = true;
+					}
 				}
 
 				break;
 			case Suspended: // suspened
-				doCCandInvCChecking();
-
-				if (isSuspendedEntryDone) {
-					suspendedDo();
+				if (doCCandInvCChecking()) { // 检测到违反
+					break;
 				} else {
-					suspendedEntry();
-					isSuspendedEntryDone = true;
+
+					if (isSuspendedEntryDone) {
+						suspendedDo();
+					} else {
+						suspendedEntry();
+						isSuspendedEntryDone = true;
+					}
 				}
 				break;
 			case Repairing: // repairing
@@ -166,13 +180,9 @@ public abstract class ElementMachine implements Runnable {
 				}
 				break;
 			case ProgressChecking: // progressChecking
-				// if (isProgressCheckingEntryDone) {
 				progressCheckingDo();
-				// } else {
-				// progressCheckingEntry();
-				// isProgressCheckingEntryDone = true;
-				// }
 				break;
+
 			case Failed:// failed
 				if (isFailedEntryDone) {
 					failedDo();
@@ -249,16 +259,18 @@ public abstract class ElementMachine implements Runnable {
 	 */
 	public void waitingEntry() {
 		Log.logDebug(this.getName(), "waitingEntry()", "init.");
-		// 先告诉父目标自己进入executing状态了
-		if (this.getParentGoal() != null) {
-			if (sendMessageToParent("WAITING")) {
-				Log.logDebug(this.getName(), "waitingEntry()",
-						"send WAITING msg to parent succeed!");
-			} else {
-				Log.logError(this.getName(), "waitingEntry()",
-						"send WAITING msg to parent error!");
-			}
-		}
+		// 设置waiting开始的时间
+		this.setStartWaitingTime(new Date());
+		// // 先告诉父目标自己进入executing状态了
+		// if (this.getParentGoal() != null) {
+		// if (sendMessageToParent("WAITING")) {
+		// Log.logDebug(this.getName(), "waitingEntry()",
+		// "send WAITING msg to parent succeed!");
+		// } else {
+		// Log.logError(this.getName(), "waitingEntry()",
+		// "send WAITING msg to parent error!");
+		// }
+		// }
 	}
 
 	/**
@@ -266,27 +278,30 @@ public abstract class ElementMachine implements Runnable {
 	 */
 	public void waitingDo() {
 		Log.logDebug(this.getName(), "waitingDo()", "init.");
-		// 先判断是否有父目标的EXITWAITING消息
-		SGMMessage msg = this.getMsgPool().poll(); // 拿出一条消息
-		if (msg != null) {
-			Log.logDebug(this.getName(), "waitingDo()", "get a message from "
-					+ msg.getSender() + "; body is: " + msg.getBody());
-			if (msg.getBody().equals("EXITWAITING")) {
-				this.setCurrentState(State.Activated);// 跳转到激活状态，等待新的Start指令
+
+		// 先判断等待时间是否超时
+		Date nowTime = new Date();
+		long waitTime = nowTime.getTime()
+				- this.getStartWaitingTime().getTime(); // 得到的差值单位是毫秒
+		// TODO 这里记得可能要在*1000前面加上*60，因为现在设的等待时间限制单位为秒，实际运行时可能需要设置为分钟
+		if (waitTime <= (this.getWaitingTimeLimit() * 1000)) { // 没有超时
+			// 然后再做条件检查，判断是否能够跳出waiting状态
+			checkPreCondition();
+			if (this.getPreCondition().isSatisfied()) {
+				this.setCurrentState(State.Executing);
 			}
-		}
-		// 然后再做条件检查，判断是否能够跳出waiting状态
-		checkPreCondition();
-		if (this.getPreCondition().satisfied) {
-			this.setCurrentState(State.Executing);
+		} else { // 超时了
+			Log.logDebug(this.getName(), "waitingDo()", "Waiting Timeout!!!!!!");
+			this.setCurrentState(State.Failed);
 		}
 
 	}
 
 	/**
-	 * executing状态中entry所做的action：需要重写
+	 * executing状态中entry所做的action：<code>GoalMachine</code>需要重写
 	 */
 	public void executingEntry() {
+		Log.logDebug(this.getName(), "executingEntry()", "init.");
 
 	}
 
@@ -357,15 +372,9 @@ public abstract class ElementMachine implements Runnable {
 				this.getConditionCauseToRepairing()));
 	}
 
-	// /**
-	// * progressChecking状态中entry所做的action：
-	// */
-	// public void progressCheckingEntry() {
-	//
-	// }
-
 	/**
-	 * progressChecking状态中do所做的action：
+	 * progressChecking状态中do所做的action：<code>GoalMachine</code>需要重写，
+	 * <code>TaskMachine</code>不需要进行进度检查，不会进入到此状态
 	 */
 	public void progressCheckingDo() {
 
@@ -506,7 +515,13 @@ public abstract class ElementMachine implements Runnable {
 					if (condition.isSatisfied()) {
 						ret = State.Executing; // pre condition满足，跳转到Executing
 					} else {
-						ret = State.Waiting; // pre condition不满足，跳转到Waiting
+						if (condition.isCanRepairing()) {
+							ret = State.Repairing; // pre
+													// condition不满足，但是能够被修复，跳转到Repairing
+						} else {
+							ret = State.Waiting; // pre
+													// condition不满足，而且不能够被修复，跳转到Waiting
+						}
 					}
 				}
 			}
@@ -554,32 +569,35 @@ public abstract class ElementMachine implements Runnable {
 	/**
 	 * 在ShouldDo复合状态中队commitment condition和invariant
 	 * condition进行检查，如果违反，跳到repairing状态，并设置ConditionCauseToRepairing
+	 * 
+	 * @return true 检测到违反；false 没有检测到违反
 	 */
-	public void doCCandInvCChecking() {
+	public boolean doCCandInvCChecking() {
 
 		// 先判断commitment condition是否为null
 		if (this.getCommitmentCondition() != null) {
 			checkCommitmentCondition();
-			if (!this.getCommitmentCondition().satisfied) {
+			if (!this.getCommitmentCondition().isSatisfied()) { // 检测到违反
 				Log.logDebug(this.getName(), "doCCandInvCChecking()",
 						"commitment condition violation is detected!!!");
 				this.setCurrentState(State.Repairing);
 				this.setConditionCauseToRepairing(this.getCommitmentCondition());
-				return;
+				return true;
 			}
 		}
 
 		// 先判断invariant condition是否为null
 		if (this.getInvariantCondition() != null) {
 			checkInvariantCondition();
-			if (!this.getInvariantCondition().satisfied) {
+			if (!this.getInvariantCondition().isSatisfied()) { // 检测到违反
 				Log.logDebug(this.getName(), "doCCandInvCChecking()",
 						"invariant condition violation is detected!!!");
 				this.setCurrentState(State.Repairing);
 				this.setConditionCauseToRepairing(this.getInvariantCondition());
-				return;
+				return true;
 			}
 		}
+		return false;
 	}
 
 	/**
@@ -692,6 +710,22 @@ public abstract class ElementMachine implements Runnable {
 
 	public void setTimeLimit(int timeLimit) {
 		this.timeLimit = timeLimit;
+	}
+
+	public Date getStartWaitingTime() {
+		return startWaitingTime;
+	}
+
+	public void setStartWaitingTime(Date startWaitingTime) {
+		this.startWaitingTime = startWaitingTime;
+	}
+
+	public int getWaitingTimeLimit() {
+		return waitingTimeLimit;
+	}
+
+	public void setWaitingTimeLimit(int waitingTimeLimit) {
+		this.waitingTimeLimit = waitingTimeLimit;
 	}
 
 	public boolean isFinish() {

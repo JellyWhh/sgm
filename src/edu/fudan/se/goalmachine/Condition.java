@@ -12,10 +12,15 @@ package edu.fudan.se.goalmachine;
 public class Condition {
 
 	private String type; // 条件类型，具体有CONTEXT,PRE,POST,COMMITMENT,INVARIANT
-	boolean satisfied = true; // 条件是否被满足，true为被满足
-	
-	public Condition(String type){
+	private boolean satisfied = true; // 条件是否被满足，true为被满足
+	private boolean canRepairing; // 标志这个条件是否可通过主动做一些事来修复，使之满足，只针对PreCondition
+
+	public Condition(String type) {
 		this.type = type;
+	}
+	public Condition(String type, boolean canPrepairing) {
+		this.type = type;
+		this.canRepairing = canPrepairing;
 	}
 
 	public String getType() {
@@ -32,5 +37,13 @@ public class Condition {
 
 	public void setSatisfied(boolean satisfied) {
 		this.satisfied = satisfied;
+	}
+
+	public boolean isCanRepairing() {
+		return canRepairing;
+	}
+
+	public void setCanRepairing(boolean canRepairing) {
+		this.canRepairing = canRepairing;
 	}
 }
