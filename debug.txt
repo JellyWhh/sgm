@@ -1,745 +1,689 @@
-2014-12-17 10:00:36 [bob] run(), LogContent: ElementMachine start!.
-2014-12-17 10:00:36 [alice] run(), LogContent: ElementMachine start!.
-2014-12-17 10:00:36 [bobChild_2] run(), LogContent: ElementMachine start!.
-2014-12-17 10:00:36 [bobChild_3] run(), LogContent: ElementMachine start!.
-2014-12-17 10:00:36 [aliceChild_2] run(), LogContent: ElementMachine start!.
-2014-12-17 10:00:36 [bobChild_1] run(), LogContent: ElementMachine start!.
-2014-12-17 10:00:36 [root] run(), LogContent: ElementMachine start!.
-2014-12-17 10:00:36 [aliceChild_1] run(), LogContent: ElementMachine start!.
-2014-12-17 10:00:36 [aliceChild_1] initialEntry(), LogContent: init..
-2014-12-17 10:00:36 [bobChild_3] initialEntry(), LogContent: init..
-2014-12-17 10:00:36 [root] initialEntry(), LogContent: init..
-2014-12-17 10:00:36 [bobChild_2] initialEntry(), LogContent: init..
-2014-12-17 10:00:36 [aliceChild_2] initialEntry(), LogContent: init..
-2014-12-17 10:00:36 [bob] initialEntry(), LogContent: init..
-2014-12-17 10:00:36 [alice] initialEntry(), LogContent: init..
-2014-12-17 10:00:36 [bobChild_1] initialEntry(), LogContent: init..
-2014-12-17 10:00:38 [bobChild_2] initialDo(), LogContent: init..
-2014-12-17 10:00:38 [aliceChild_2] initialDo(), LogContent: init..
-2014-12-17 10:00:38 [root] initialDo(), LogContent: init..
-2014-12-17 10:00:38 [alice] initialDo(), LogContent: init..
-2014-12-17 10:00:38 [bobChild_1] initialDo(), LogContent: init..
-2014-12-17 10:00:38 [bobChild_3] initialDo(), LogContent: init..
-2014-12-17 10:00:38 [bob] initialDo(), LogContent: init..
-2014-12-17 10:00:38 [aliceChild_1] initialDo(), LogContent: init..
-2014-12-17 10:00:40 [bobChild_3] initialDo(), LogContent: init..
-2014-12-17 10:00:40 [bobChild_1] initialDo(), LogContent: init..
-2014-12-17 10:00:40 [bobChild_2] initialDo(), LogContent: init..
-2014-12-17 10:00:40 [aliceChild_2] initialDo(), LogContent: init..
-2014-12-17 10:00:40 [alice] initialDo(), LogContent: init..
-2014-12-17 10:00:40 [aliceChild_1] initialDo(), LogContent: init..
-2014-12-17 10:00:40 [root] initialDo(), LogContent: init..
-2014-12-17 10:00:40 [bob] initialDo(), LogContent: init..
-2014-12-17 10:00:42 [bobChild_2] initialDo(), LogContent: init..
-2014-12-17 10:00:42 [aliceChild_2] initialDo(), LogContent: init..
-2014-12-17 10:00:42 [alice] initialDo(), LogContent: init..
-2014-12-17 10:00:42 [bobChild_1] initialDo(), LogContent: init..
-2014-12-17 10:00:42 [bob] initialDo(), LogContent: init..
-2014-12-17 10:00:42 [root] initialDo(), LogContent: init..
-2014-12-17 10:00:42 [aliceChild_1] initialDo(), LogContent: init..
-2014-12-17 10:00:42 [bobChild_3] initialDo(), LogContent: init..
-2014-12-17 10:00:42 [root] initialDo(), LogContent: get a msg from null, body is: ACTIVATE.
-2014-12-17 10:00:44 [bob] initialDo(), LogContent: init..
-2014-12-17 10:00:44 [aliceChild_1] initialDo(), LogContent: init..
-2014-12-17 10:00:44 [bobChild_2] initialDo(), LogContent: init..
-2014-12-17 10:00:44 [aliceChild_2] initialDo(), LogContent: init..
-2014-12-17 10:00:44 [root] activatedEntry(), LogContent: init..
-2014-12-17 10:00:44 [bobChild_3] initialDo(), LogContent: init..
-2014-12-17 10:00:44 [bobChild_1] initialDo(), LogContent: init..
-2014-12-17 10:00:44 [alice] initialDo(), LogContent: init..
-2014-12-17 10:00:44 [alice] initialDo(), LogContent: get a msg from root, body is: ACTIVATE.
-2014-12-17 10:00:44 [root] activatedEntry(), LogContent: send "ACTIVATE" msg to alice succeed!.
-2014-12-17 10:00:44 [root] activatedEntry(), LogContent: send "ACTIVATE" msg to bob succeed!.
-2014-12-17 10:00:46 [aliceChild_2] initialDo(), LogContent: init..
-2014-12-17 10:00:46 [aliceChild_1] initialDo(), LogContent: init..
-2014-12-17 10:00:46 [bobChild_3] initialDo(), LogContent: init..
-2014-12-17 10:00:46 [bobChild_2] initialDo(), LogContent: init..
-2014-12-17 10:00:46 [alice] activatedEntry(), LogContent: init..
-2014-12-17 10:00:46 [bobChild_1] initialDo(), LogContent: init..
-2014-12-17 10:00:46 [root] activateDo(), LogContent: init..
-2014-12-17 10:00:46 [bob] initialDo(), LogContent: init..
-2014-12-17 10:00:46 [bob] initialDo(), LogContent: get a msg from root, body is: ACTIVATE.
-2014-12-17 10:00:46 [root] activatedDo_waitingSubReply(), LogContent: init..
-2014-12-17 10:00:46 [alice] activatedEntry(), LogContent: send "ACTIVATE" msg to aliceChild_1 succeed!.
-2014-12-17 10:00:46 [alice] activatedEntry(), LogContent: send "ACTIVATE" msg to aliceChild_2 succeed!.
-2014-12-17 10:00:48 [bobChild_2] initialDo(), LogContent: init..
-2014-12-17 10:00:48 [aliceChild_2] initialDo(), LogContent: init..
-2014-12-17 10:00:48 [aliceChild_1] initialDo(), LogContent: init..
-2014-12-17 10:00:48 [bobChild_3] initialDo(), LogContent: init..
-2014-12-17 10:00:48 [bob] activatedEntry(), LogContent: init..
-2014-12-17 10:00:48 [alice] activateDo(), LogContent: init..
-2014-12-17 10:00:48 [bobChild_1] initialDo(), LogContent: init..
-2014-12-17 10:00:48 [root] activateDo(), LogContent: init..
-2014-12-17 10:00:48 [root] activatedDo_waitingSubReply(), LogContent: init..
-2014-12-17 10:00:48 [aliceChild_2] initialDo(), LogContent: get a msg from alice, body is: ACTIVATE.
-2014-12-17 10:00:48 [alice] activatedDo_waitingSubReply(), LogContent: init..
-2014-12-17 10:00:48 [aliceChild_1] initialDo(), LogContent: get a msg from alice, body is: ACTIVATE.
-2014-12-17 10:00:48 [bob] activatedEntry(), LogContent: send "ACTIVATE" msg to bobChild_3 succeed!.
-2014-12-17 10:00:48 [bob] activatedEntry(), LogContent: send "ACTIVATE" msg to bobChild_2 succeed!.
-2014-12-17 10:00:48 [bob] activatedEntry(), LogContent: send "ACTIVATE" msg to bobChild_1 succeed!.
-2014-12-17 10:00:50 [root] activateDo(), LogContent: init..
-2014-12-17 10:00:50 [bobChild_2] initialDo(), LogContent: init..
-2014-12-17 10:00:50 [bobChild_3] initialDo(), LogContent: init..
-2014-12-17 10:00:50 [alice] activateDo(), LogContent: init..
-2014-12-17 10:00:50 [bobChild_1] initialDo(), LogContent: init..
-2014-12-17 10:00:50 [aliceChild_2] activatedEntry(), LogContent: init..
-2014-12-17 10:00:50 [bobChild_1] initialDo(), LogContent: get a msg from bob, body is: ACTIVATE.
-2014-12-17 10:00:50 [bobChild_3] initialDo(), LogContent: get a msg from bob, body is: ACTIVATE.
-2014-12-17 10:00:50 [root] activatedDo_waitingSubReply(), LogContent: init..
-2014-12-17 10:00:50 [alice] activatedDo_waitingSubReply(), LogContent: init..
-2014-12-17 10:00:50 [bobChild_2] initialDo(), LogContent: get a msg from bob, body is: ACTIVATE.
-2014-12-17 10:00:50 [aliceChild_2] activatedEntry(), LogContent: send ACTIVATEDDONE msg to alice succeed!.
-2014-12-17 10:00:50 [alice] activatedDo_waitingSubReply(), LogContent: get a message from aliceChild_2; body is: ACTIVATEDDONE.
-2014-12-17 10:00:50 [bob] activateDo(), LogContent: init..
-2014-12-17 10:00:50 [bob] activatedDo_waitingSubReply(), LogContent: init..
-2014-12-17 10:00:52 [aliceChild_2] activateDo(), LogContent: init..
-2014-12-17 10:00:52 [bobChild_2] activatedEntry(), LogContent: init..
-2014-12-17 10:00:52 [bobChild_1] activatedEntry(), LogContent: init..
-2014-12-17 10:00:52 [alice] activateDo(), LogContent: init..
-2014-12-17 10:00:52 [aliceChild_1] repairingDo(), LogContent: init..
-2014-12-17 10:00:52 [root] activateDo(), LogContent: init..
-2014-12-17 10:00:52 [alice] activatedDo_waitingSubReply(), LogContent: init..
-2014-12-17 10:00:52 [root] activatedDo_waitingSubReply(), LogContent: init..
-2014-12-17 10:00:52 [bobChild_2] activatedEntry(), LogContent: send ACTIVATEDDONE msg to bob succeed!.
-2014-12-17 10:00:52 [bobChild_1] activatedEntry(), LogContent: send ACTIVATEDDONE msg to bob succeed!.
-2014-12-17 10:00:52 [bob] activateDo(), LogContent: init..
-2014-12-17 10:00:52 [bob] activatedDo_waitingSubReply(), LogContent: init..
-2014-12-17 10:00:52 [bob] activatedDo_waitingSubReply(), LogContent: get a message from bobChild_1; body is: ACTIVATEDDONE.
-2014-12-17 10:00:54 [root] activateDo(), LogContent: init..
-2014-12-17 10:00:54 [alice] activateDo(), LogContent: init..
-2014-12-17 10:00:54 [bobChild_3] repairingDo(), LogContent: init..
-2014-12-17 10:00:54 [aliceChild_2] activateDo(), LogContent: init..
-2014-12-17 10:00:54 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:00:54 [aliceChild_1] activatedEntry(), LogContent: init..
-2014-12-17 10:00:54 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:00:54 [root] activatedDo_waitingSubReply(), LogContent: init..
-2014-12-17 10:00:54 [alice] activatedDo_waitingSubReply(), LogContent: init..
-2014-12-17 10:00:54 [aliceChild_1] activatedEntry(), LogContent: send ACTIVATEDDONE msg to alice succeed!.
-2014-12-17 10:00:54 [alice] activatedDo_waitingSubReply(), LogContent: get a message from aliceChild_1; body is: ACTIVATEDDONE.
-2014-12-17 10:00:54 [alice] activatedDo_waitingSubReply(), LogContent: send ACTIVATEDDONE msg to parent..
-2014-12-17 10:00:54 [bob] activateDo(), LogContent: init..
-2014-12-17 10:00:54 [bob] activatedDo_waitingSubReply(), LogContent: init..
-2014-12-17 10:00:54 [bob] activatedDo_waitingSubReply(), LogContent: get a message from bobChild_2; body is: ACTIVATEDDONE.
-2014-12-17 10:00:56 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:00:56 [aliceChild_2] activateDo(), LogContent: init..
-2014-12-17 10:00:56 [alice] activateDo(), LogContent: init..
-2014-12-17 10:00:56 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:00:56 [aliceChild_1] activateDo(), LogContent: init..
-2014-12-17 10:00:56 [bobChild_3] activatedEntry(), LogContent: init..
-2014-12-17 10:00:56 [root] activateDo(), LogContent: init..
-2014-12-17 10:00:56 [root] activatedDo_waitingSubReply(), LogContent: init..
-2014-12-17 10:00:56 [bobChild_3] activatedEntry(), LogContent: send ACTIVATEDDONE msg to bob succeed!.
-2014-12-17 10:00:56 [root] activatedDo_waitingSubReply(), LogContent: get a message from alice; body is: ACTIVATEDDONE.
-2014-12-17 10:00:56 [bob] activateDo(), LogContent: init..
-2014-12-17 10:00:56 [bob] activatedDo_waitingSubReply(), LogContent: init..
-2014-12-17 10:00:56 [bob] activatedDo_waitingSubReply(), LogContent: get a message from bobChild_3; body is: ACTIVATEDDONE.
-2014-12-17 10:00:56 [bob] activatedDo_waitingSubReply(), LogContent: send ACTIVATEDDONE msg to parent..
-2014-12-17 10:00:58 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:00:58 [aliceChild_1] activateDo(), LogContent: init..
-2014-12-17 10:00:58 [aliceChild_2] activateDo(), LogContent: init..
-2014-12-17 10:00:58 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:00:58 [root] activateDo(), LogContent: init..
-2014-12-17 10:00:58 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:00:58 [alice] activateDo(), LogContent: init..
-2014-12-17 10:00:58 [root] activatedDo_waitingSubReply(), LogContent: init..
-2014-12-17 10:00:58 [root] activatedDo_waitingSubReply(), LogContent: get a message from bob; body is: ACTIVATEDDONE.
-2014-12-17 10:00:58 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:00 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:00 [aliceChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:00 [aliceChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:00 [alice] activateDo(), LogContent: init..
-2014-12-17 10:01:00 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:00 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:00 [root] executingEntry(), LogContent: init..
-2014-12-17 10:01:00 [root] executingEntryDo_sendMesToOneSub_AND_SERIAL(), LogContent: init..
-2014-12-17 10:01:00 [root] executingEntryDo_sendMesToOneSub_AND_SERIAL(), LogContent: send START msg to alice succeed!.
-2014-12-17 10:01:00 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:02 [alice] activateDo(), LogContent: init..
-2014-12-17 10:01:02 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:02 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:02 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:02 [aliceChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:02 [aliceChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:02 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:02 [root] checkIfSuspend(), LogContent: get a message from null; body is: SUSPEND.
-2014-12-17 10:01:02 [alice] activateDo(), LogContent: get a message from root; body is: START.
-2014-12-17 10:01:02 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:04 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:04 [aliceChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:04 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:04 [aliceChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:04 [root] suspendedEntry(), LogContent: init..
-2014-12-17 10:01:04 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:04 [alice] executingEntry(), LogContent: init..
-2014-12-17 10:01:04 [alice] executingEntry_sendMesToAllSub_AND_PARALLERL(), LogContent: init..
-2014-12-17 10:01:04 [root] suspendedEntry(), LogContent: send SUSPEND msg to alice succeed!.
-2014-12-17 10:01:04 [alice] executingEntry_sendMesToAllSub_AND_PARALLERL(), LogContent: send START msg to aliceChild_1 succeed!.
-2014-12-17 10:01:04 [root] suspendedEntry(), LogContent: send SUSPEND msg to bob succeed!.
-2014-12-17 10:01:04 [alice] executingEntry_sendMesToAllSub_AND_PARALLERL(), LogContent: send START msg to aliceChild_2 succeed!.
-2014-12-17 10:01:04 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:04 [bob] activateDo(), LogContent: get a message from root; body is: SUSPEND.
-2014-12-17 10:01:06 [alice] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:06 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:06 [aliceChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:06 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:06 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:06 [aliceChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:06 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:06 [aliceChild_1] activateDo_waitingParentNotify(), LogContent: get a message from alice; body is: START.
-2014-12-17 10:01:06 [aliceChild_2] activateDo_waitingParentNotify(), LogContent: get a message from alice; body is: START.
-2014-12-17 10:01:06 [alice] checkIfSuspend(), LogContent: get a message from root; body is: SUSPEND.
-2014-12-17 10:01:06 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:08 [alice] suspendedEntry(), LogContent: init..
-2014-12-17 10:01:08 [aliceChild_1] executingEntry(), LogContent: init..
-2014-12-17 10:01:08 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:08 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:08 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:08 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:08 [aliceChild_2] executingEntry(), LogContent: init..
-2014-12-17 10:01:08 [alice] suspendedEntry(), LogContent: send SUSPEND msg to aliceChild_1 succeed!.
-2014-12-17 10:01:08 [alice] suspendedEntry(), LogContent: send SUSPEND msg to aliceChild_2 succeed!.
-2014-12-17 10:01:08 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:10 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:10 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:10 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:10 [aliceChild_2] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:10 [alice] suspendedDo(), LogContent: init..
-2014-12-17 10:01:10 [aliceChild_1] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:10 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:10 [aliceChild_1] checkIfSuspend(), LogContent: get a message from alice; body is: SUSPEND.
-2014-12-17 10:01:10 [aliceChild_2] checkIfSuspend(), LogContent: get a message from alice; body is: SUSPEND.
-2014-12-17 10:01:10 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:12 [alice] suspendedDo(), LogContent: init..
-2014-12-17 10:01:12 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:12 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:12 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:12 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:12 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:14 [aliceChild_2] suspendedDo(), LogContent: init..
-2014-12-17 10:01:14 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:14 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:14 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:14 [alice] suspendedDo(), LogContent: init..
-2014-12-17 10:01:14 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:14 [aliceChild_1] suspendedDo(), LogContent: init..
-2014-12-17 10:01:14 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:16 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:16 [alice] suspendedDo(), LogContent: init..
-2014-12-17 10:01:16 [aliceChild_2] suspendedDo(), LogContent: init..
-2014-12-17 10:01:16 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:16 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:16 [aliceChild_1] suspendedDo(), LogContent: init..
-2014-12-17 10:01:16 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:16 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:18 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:18 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:18 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:18 [aliceChild_1] suspendedDo(), LogContent: init..
-2014-12-17 10:01:18 [alice] suspendedDo(), LogContent: init..
-2014-12-17 10:01:18 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:18 [aliceChild_2] suspendedDo(), LogContent: init..
-2014-12-17 10:01:18 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:20 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:20 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:20 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:20 [aliceChild_2] suspendedDo(), LogContent: init..
-2014-12-17 10:01:20 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:20 [alice] suspendedDo(), LogContent: init..
-2014-12-17 10:01:20 [aliceChild_1] suspendedDo(), LogContent: init..
-2014-12-17 10:01:20 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:22 [aliceChild_1] suspendedDo(), LogContent: init..
-2014-12-17 10:01:22 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:22 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:22 [alice] suspendedDo(), LogContent: init..
-2014-12-17 10:01:22 [aliceChild_2] suspendedDo(), LogContent: init..
-2014-12-17 10:01:22 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:22 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:22 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:24 [aliceChild_2] suspendedDo(), LogContent: init..
-2014-12-17 10:01:24 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:24 [alice] suspendedDo(), LogContent: init..
-2014-12-17 10:01:24 [aliceChild_1] suspendedDo(), LogContent: init..
-2014-12-17 10:01:24 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:24 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:24 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:24 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:26 [aliceChild_1] suspendedDo(), LogContent: init..
-2014-12-17 10:01:26 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:26 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:26 [aliceChild_2] suspendedDo(), LogContent: init..
-2014-12-17 10:01:26 [alice] suspendedDo(), LogContent: init..
-2014-12-17 10:01:26 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:26 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:26 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:28 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:28 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:28 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:28 [aliceChild_1] suspendedDo(), LogContent: init..
-2014-12-17 10:01:28 [aliceChild_2] suspendedDo(), LogContent: init..
-2014-12-17 10:01:28 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:28 [alice] suspendedDo(), LogContent: init..
-2014-12-17 10:01:28 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:30 [alice] suspendedDo(), LogContent: init..
-2014-12-17 10:01:30 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:30 [aliceChild_1] suspendedDo(), LogContent: init..
-2014-12-17 10:01:30 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:30 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:30 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:30 [aliceChild_2] suspendedDo(), LogContent: init..
-2014-12-17 10:01:30 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:32 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:32 [aliceChild_1] suspendedDo(), LogContent: init..
-2014-12-17 10:01:32 [aliceChild_2] suspendedDo(), LogContent: init..
-2014-12-17 10:01:32 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:32 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:32 [alice] suspendedDo(), LogContent: init..
-2014-12-17 10:01:32 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:32 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:34 [aliceChild_1] suspendedDo(), LogContent: init..
-2014-12-17 10:01:34 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:34 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:34 [aliceChild_2] suspendedDo(), LogContent: init..
-2014-12-17 10:01:34 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:34 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:34 [alice] suspendedDo(), LogContent: init..
-2014-12-17 10:01:34 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:36 [alice] suspendedDo(), LogContent: init..
-2014-12-17 10:01:36 [aliceChild_1] suspendedDo(), LogContent: init..
-2014-12-17 10:01:36 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:36 [root] suspendedDo(), LogContent: init..
-2014-12-17 10:01:36 [aliceChild_2] suspendedDo(), LogContent: init..
-2014-12-17 10:01:36 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:36 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:36 [root] suspendedDo(), LogContent: get a message from null; body is: RESUME.
-2014-12-17 10:01:36 [root] suspendedEntry(), LogContent: send RESUME msg to alice succeed!.
-2014-12-17 10:01:36 [root] suspendedEntry(), LogContent: send RESUME msg to bob succeed!.
-2014-12-17 10:01:36 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:36 [bob] activateDo(), LogContent: get a message from root; body is: RESUME.
-2014-12-17 10:01:38 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:38 [aliceChild_1] suspendedDo(), LogContent: init..
-2014-12-17 10:01:38 [alice] suspendedDo(), LogContent: init..
-2014-12-17 10:01:38 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:38 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:38 [aliceChild_2] suspendedDo(), LogContent: init..
-2014-12-17 10:01:38 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:38 [root] executingDo(), LogContent: init..
-2014-12-17 10:01:38 [alice] suspendedDo(), LogContent: get a message from root; body is: RESUME.
-2014-12-17 10:01:38 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:01:38 [alice] suspendedEntry(), LogContent: send RESUME msg to aliceChild_1 succeed!.
-2014-12-17 10:01:38 [alice] suspendedEntry(), LogContent: send RESUME msg to aliceChild_2 succeed!.
-2014-12-17 10:01:38 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:40 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:40 [aliceChild_1] suspendedDo(), LogContent: init..
-2014-12-17 10:01:40 [alice] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:40 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:40 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:40 [aliceChild_2] suspendedDo(), LogContent: init..
-2014-12-17 10:01:40 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:40 [alice] executingDo(), LogContent: init..
-2014-12-17 10:01:40 [aliceChild_2] suspendedDo(), LogContent: get a message from alice; body is: RESUME.
-2014-12-17 10:01:40 [root] executingDo(), LogContent: init..
-2014-12-17 10:01:40 [aliceChild_1] suspendedDo(), LogContent: get a message from alice; body is: RESUME.
-2014-12-17 10:01:40 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:01:40 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
-2014-12-17 10:01:40 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:42 [aliceChild_2] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:42 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:42 [aliceChild_1] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:42 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:42 [alice] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:42 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:42 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:42 [aliceChild_1] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:01:42 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:01:42 [alice] executingDo(), LogContent: init..
-2014-12-17 10:01:42 [root] executingDo(), LogContent: init..
-2014-12-17 10:01:42 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:01:42 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
-2014-12-17 10:01:42 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:44 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:44 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:44 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:44 [aliceChild_1] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:44 [aliceChild_2] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:44 [alice] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:44 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:44 [aliceChild_1] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:01:44 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:01:44 [root] executingDo(), LogContent: init..
-2014-12-17 10:01:44 [alice] executingDo(), LogContent: init..
-2014-12-17 10:01:44 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
-2014-12-17 10:01:44 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:01:44 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:46 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:46 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:46 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:46 [aliceChild_1] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:46 [aliceChild_2] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:46 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:01:46 [aliceChild_1] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:01:46 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:46 [alice] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:46 [root] executingDo(), LogContent: init..
-2014-12-17 10:01:46 [alice] executingDo(), LogContent: init..
-2014-12-17 10:01:46 [aliceChild_1] executingDo_waitingEnd(), LogContent: get a message from null; body is: END.
-2014-12-17 10:01:46 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
-2014-12-17 10:01:46 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:01:46 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:48 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:48 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:48 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:48 [aliceChild_2] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:48 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:01:48 [aliceChild_1] achievedEntry(), LogContent: init..
-2014-12-17 10:01:48 [alice] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:48 [alice] executingDo(), LogContent: init..
-2014-12-17 10:01:48 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:48 [aliceChild_1] achievedEntry(), LogContent: send ACHIEVEDDONE msg to parent succeed!.
-2014-12-17 10:01:48 [root] executingDo(), LogContent: init..
-2014-12-17 10:01:48 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
-2014-12-17 10:01:48 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: get a message from aliceChild_1; body is: ACHIEVEDDONE.
-2014-12-17 10:01:48 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:01:48 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:50 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:50 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:50 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:50 [aliceChild_2] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:50 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:01:50 [aliceChild_1] achievedDo(), LogContent: init..
-2014-12-17 10:01:50 [aliceChild_1] stopMachine(), LogContent: It begins to stop its machine.
-2014-12-17 10:01:50 [aliceChild_1] achievedDo(), LogContent: It has achieved its goal and stopped its machine!.
-2014-12-17 10:01:50 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:50 [alice] progressCheckingDo(), LogContent: init..
-2014-12-17 10:01:50 [root] executingDo(), LogContent: init..
-2014-12-17 10:01:50 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:50 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:01:52 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:52 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:52 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:52 [aliceChild_2] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:52 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:01:52 [alice] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:52 [aliceChild_1] run(), LogContent: ElementMachine stop while cycling!.
-2014-12-17 10:01:52 [aliceChild_2] executingDo_waitingEnd(), LogContent: get a message from null; body is: END.
-2014-12-17 10:01:52 [alice] executingDo(), LogContent: init..
-2014-12-17 10:01:52 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:52 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
-2014-12-17 10:01:52 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:52 [root] executingDo(), LogContent: init..
-2014-12-17 10:01:52 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:01:54 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:54 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:54 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:54 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:54 [aliceChild_2] achievedEntry(), LogContent: init..
-2014-12-17 10:01:54 [alice] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:54 [alice] executingDo(), LogContent: init..
-2014-12-17 10:01:54 [aliceChild_2] achievedEntry(), LogContent: send ACHIEVEDDONE msg to parent succeed!.
-2014-12-17 10:01:54 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
-2014-12-17 10:01:54 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:54 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: get a message from aliceChild_2; body is: ACHIEVEDDONE.
-2014-12-17 10:01:54 [root] executingDo(), LogContent: init..
-2014-12-17 10:01:54 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:01:56 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:56 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:56 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:56 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:56 [aliceChild_2] achievedDo(), LogContent: init..
-2014-12-17 10:01:56 [aliceChild_2] stopMachine(), LogContent: It begins to stop its machine.
-2014-12-17 10:01:56 [alice] progressCheckingDo(), LogContent: init..
-2014-12-17 10:01:56 [aliceChild_2] achievedDo(), LogContent: It has achieved its goal and stopped its machine!.
-2014-12-17 10:01:56 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:56 [root] executingDo(), LogContent: init..
-2014-12-17 10:01:56 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:01:58 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:01:58 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:01:58 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:01:58 [bob] activateDo(), LogContent: init..
-2014-12-17 10:01:58 [aliceChild_2] run(), LogContent: ElementMachine stop while cycling!.
-2014-12-17 10:01:58 [alice] achievedEntry(), LogContent: init..
-2014-12-17 10:01:58 [alice] achievedEntry(), LogContent: send ACHIEVEDDONE msg to parent succeed!.
-2014-12-17 10:01:58 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:01:58 [root] executingDo(), LogContent: init..
-2014-12-17 10:01:58 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:01:58 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: get a message from alice; body is: ACHIEVEDDONE.
-2014-12-17 10:02:00 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:00 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:00 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:02:00 [bob] activateDo(), LogContent: init..
-2014-12-17 10:02:00 [alice] achievedDo(), LogContent: init..
-2014-12-17 10:02:00 [alice] achievedDo(), LogContent: It has achieved its goal and stopped its machine!.
-2014-12-17 10:02:00 [root] progressCheckingDo(), LogContent: init..
-2014-12-17 10:02:02 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:02 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:02:02 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:02 [bob] activateDo(), LogContent: init..
-2014-12-17 10:02:02 [alice] run(), LogContent: ElementMachine stop while cycling!.
-2014-12-17 10:02:02 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:02 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:02 [root] executingEntryDo_sendMesToOneSub_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:02 [root] executingEntryDo_sendMesToOneSub_AND_SERIAL(), LogContent: send START msg to bob succeed!.
-2014-12-17 10:02:04 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:04 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:04 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:02:04 [bob] activateDo(), LogContent: init..
-2014-12-17 10:02:04 [bob] activateDo(), LogContent: get a message from root; body is: START.
-2014-12-17 10:02:04 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:04 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:04 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:06 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:02:06 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:06 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:06 [bob] executingEntry(), LogContent: init..
-2014-12-17 10:02:06 [bob] executingEntryDo_sendMesToOneSub_OR(), LogContent: init..
-2014-12-17 10:02:06 [bob] executingEntryDo_sendMesToOneSub_OR(), LogContent: send START msg to bobChild_3 succeed!.
-2014-12-17 10:02:06 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:06 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:06 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:08 [bobChild_3] activateDo(), LogContent: init..
-2014-12-17 10:02:08 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:08 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:08 [bobChild_3] activateDo_waitingParentNotify(), LogContent: get a message from bob; body is: START.
-2014-12-17 10:02:08 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:08 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:08 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:08 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:08 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:08 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:10 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:10 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:10 [bobChild_3] executingEntry(), LogContent: init..
-2014-12-17 10:02:10 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:10 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:10 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:10 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:10 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:10 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:12 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:12 [bobChild_3] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:12 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:12 [bobChild_3] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:02:12 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:12 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:12 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:12 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:12 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:12 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:14 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:14 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:14 [bobChild_3] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:14 [bobChild_3] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:02:14 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:14 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:14 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:14 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:14 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:14 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:16 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:16 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:16 [bobChild_3] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:16 [bobChild_3] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:02:16 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:16 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:16 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:16 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:16 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:16 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:18 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:18 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:18 [bobChild_3] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:18 [bobChild_3] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:02:18 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:18 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:18 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:18 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:18 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:18 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:20 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:20 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:20 [bobChild_3] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:20 [bobChild_3] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:02:20 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:20 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:20 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:20 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:20 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:20 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:22 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:22 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:22 [bobChild_3] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:22 [bobChild_3] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:02:22 [bobChild_3] executingDo_waitingEnd(), LogContent: get a message from null; body is: END.
-2014-12-17 10:02:22 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:22 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:22 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:22 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:22 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:22 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:24 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:24 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:24 [bobChild_3] repairingDo(), LogContent: init..
-2014-12-17 10:02:24 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:24 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:24 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:24 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:24 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:24 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:26 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:26 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:26 [bobChild_3] failedEntry(), LogContent: init..
-2014-12-17 10:02:26 [bobChild_3] failedEntry(), LogContent: send FAILED msg to parent succeed!.
-2014-12-17 10:02:26 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:26 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:26 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:26 [bob] executingDo_waitingSubReply_OR(), LogContent: get a message from bobChild_3; body is: FAILED.
-2014-12-17 10:02:26 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:26 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:26 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:28 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:28 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:28 [bobChild_3] failedDo(), LogContent: init..
-2014-12-17 10:02:28 [bobChild_3] stopMachine(), LogContent: It begins to stop its machine.
-2014-12-17 10:02:28 [bobChild_3] failedDo(), LogContent: It failed to achieved its goal and stopped its machine!.
-2014-12-17 10:02:28 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:28 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:28 [bob] executingEntryDo_sendMesToOneSub_OR(), LogContent: init..
-2014-12-17 10:02:28 [bob] executingEntryDo_sendMesToOneSub_OR(), LogContent: send START msg to bobChild_2 succeed!.
-2014-12-17 10:02:28 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:28 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:28 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:30 [bobChild_2] activateDo(), LogContent: init..
-2014-12-17 10:02:30 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:30 [bobChild_2] activateDo_waitingParentNotify(), LogContent: get a message from bob; body is: START.
-2014-12-17 10:02:30 [bobChild_3] run(), LogContent: ElementMachine stop while cycling!.
-2014-12-17 10:02:30 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:30 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:30 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:30 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:30 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:30 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:32 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:32 [bobChild_2] waitingEntry(), LogContent: init..
-2014-12-17 10:02:32 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:32 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:32 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:32 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:32 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:32 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:34 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:34 [bobChild_2] waitingDo(), LogContent: init..
-2014-12-17 10:02:34 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:34 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:34 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:34 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:34 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:34 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:36 [bobChild_2] waitingDo(), LogContent: init..
-2014-12-17 10:02:36 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:36 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:36 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:36 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:36 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:36 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:36 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:38 [bobChild_2] waitingDo(), LogContent: init..
-2014-12-17 10:02:38 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:38 [bobChild_2] waitingDo(), LogContent: Waiting Timeout!!!!!!.
-2014-12-17 10:02:38 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:38 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:38 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:38 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:38 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:38 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:40 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:40 [bobChild_2] failedEntry(), LogContent: init..
-2014-12-17 10:02:40 [bobChild_2] failedEntry(), LogContent: send FAILED msg to parent succeed!.
-2014-12-17 10:02:40 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:40 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:40 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:40 [bob] executingDo_waitingSubReply_OR(), LogContent: get a message from bobChild_2; body is: FAILED.
-2014-12-17 10:02:40 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:40 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:40 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:42 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:42 [bobChild_2] failedDo(), LogContent: init..
-2014-12-17 10:02:42 [bobChild_2] stopMachine(), LogContent: It begins to stop its machine.
-2014-12-17 10:02:42 [bobChild_2] failedDo(), LogContent: It failed to achieved its goal and stopped its machine!.
-2014-12-17 10:02:42 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:42 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:42 [bob] executingEntryDo_sendMesToOneSub_OR(), LogContent: init..
-2014-12-17 10:02:42 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:42 [bob] executingEntryDo_sendMesToOneSub_OR(), LogContent: send START msg to bobChild_1 succeed!.
-2014-12-17 10:02:42 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:42 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:44 [bobChild_1] activateDo(), LogContent: init..
-2014-12-17 10:02:44 [bobChild_1] activateDo_waitingParentNotify(), LogContent: get a message from bob; body is: START.
-2014-12-17 10:02:44 [bobChild_2] run(), LogContent: ElementMachine stop while cycling!.
-2014-12-17 10:02:44 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:44 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:44 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:44 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:44 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:44 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:46 [bobChild_1] executingEntry(), LogContent: init..
-2014-12-17 10:02:46 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:46 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:46 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:46 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:46 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:46 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:48 [bobChild_1] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:48 [bobChild_1] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:02:48 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:48 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:48 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:48 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:48 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:48 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:50 [bobChild_1] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:50 [bobChild_1] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:02:50 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:50 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:50 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:50 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:50 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:50 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:52 [bobChild_1] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:52 [bobChild_1] executingDo_waitingEnd(), LogContent: init..
-2014-12-17 10:02:52 [bobChild_1] executingDo_waitingEnd(), LogContent: get a message from null; body is: END.
-2014-12-17 10:02:52 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:52 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:52 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:52 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:52 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:52 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:54 [bobChild_1] achievedEntry(), LogContent: init..
-2014-12-17 10:02:54 [bobChild_1] achievedEntry(), LogContent: send ACHIEVEDDONE msg to parent succeed!.
-2014-12-17 10:02:54 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:54 [bob] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:54 [bob] executingDo(), LogContent: init..
-2014-12-17 10:02:54 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:54 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
-2014-12-17 10:02:54 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:54 [bob] executingDo_waitingSubReply_OR(), LogContent: get a message from bobChild_1; body is: ACHIEVEDDONE.
-2014-12-17 10:02:56 [bobChild_1] achievedDo(), LogContent: init..
-2014-12-17 10:02:56 [bobChild_1] stopMachine(), LogContent: It begins to stop its machine.
-2014-12-17 10:02:56 [bobChild_1] achievedDo(), LogContent: It has achieved its goal and stopped its machine!.
-2014-12-17 10:02:56 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:56 [bob] progressCheckingDo(), LogContent: init..
-2014-12-17 10:02:56 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:56 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:58 [bobChild_1] run(), LogContent: ElementMachine stop while cycling!.
-2014-12-17 10:02:58 [bob] achievedEntry(), LogContent: init..
-2014-12-17 10:02:58 [root] checkIfSuspend(), LogContent: init..
-2014-12-17 10:02:58 [bob] achievedEntry(), LogContent: send ACHIEVEDDONE msg to parent succeed!.
-2014-12-17 10:02:58 [root] executingDo(), LogContent: init..
-2014-12-17 10:02:58 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
-2014-12-17 10:02:58 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: get a message from bob; body is: ACHIEVEDDONE.
-2014-12-17 10:03:00 [bob] achievedDo(), LogContent: init..
-2014-12-17 10:03:00 [bob] achievedDo(), LogContent: It has achieved its goal and stopped its machine!.
-2014-12-17 10:03:00 [root] progressCheckingDo(), LogContent: init..
-2014-12-17 10:03:02 [bob] run(), LogContent: ElementMachine stop while cycling!.
-2014-12-17 10:03:02 [root] achievedEntry(), LogContent: init..
-2014-12-17 10:03:04 [root] achievedDo(), LogContent: init..
-2014-12-17 10:03:04 [root] achievedDo(), LogContent: It has achieved its goal and stopped its machine!.
-2014-12-17 10:03:06 [root] run(), LogContent: ElementMachine stop while cycling!.
+2014-12-18 15:56:26 [aliceChild_1] run(), LogContent: ElementMachine start!.
+2014-12-18 15:56:26 [bob] run(), LogContent: ElementMachine start!.
+2014-12-18 15:56:26 [aliceChild_2] run(), LogContent: ElementMachine start!.
+2014-12-18 15:56:26 [bobChild_3] run(), LogContent: ElementMachine start!.
+2014-12-18 15:56:26 [root] run(), LogContent: ElementMachine start!.
+2014-12-18 15:56:26 [bobChild_1] run(), LogContent: ElementMachine start!.
+2014-12-18 15:56:26 [bobChild_2] run(), LogContent: ElementMachine start!.
+2014-12-18 15:56:26 [alice] run(), LogContent: ElementMachine start!.
+2014-12-18 15:56:26 [aliceChild_2] initialEntry(), LogContent: init..
+2014-12-18 15:56:26 [bobChild_1] initialEntry(), LogContent: init..
+2014-12-18 15:56:26 [root] initialEntry(), LogContent: init..
+2014-12-18 15:56:26 [bobChild_3] initialEntry(), LogContent: init..
+2014-12-18 15:56:26 [aliceChild_1] initialEntry(), LogContent: init..
+2014-12-18 15:56:26 [bob] initialEntry(), LogContent: init..
+2014-12-18 15:56:26 [bobChild_2] initialEntry(), LogContent: init..
+2014-12-18 15:56:26 [alice] initialEntry(), LogContent: init..
+2014-12-18 15:56:28 [bobChild_3] initialDo(), LogContent: init..
+2014-12-18 15:56:28 [root] initialDo(), LogContent: init..
+2014-12-18 15:56:28 [alice] initialDo(), LogContent: init..
+2014-12-18 15:56:28 [aliceChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:28 [bob] initialDo(), LogContent: init..
+2014-12-18 15:56:28 [bobChild_2] initialDo(), LogContent: init..
+2014-12-18 15:56:28 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:28 [aliceChild_2] initialDo(), LogContent: init..
+2014-12-18 15:56:30 [root] initialDo(), LogContent: init..
+2014-12-18 15:56:30 [alice] initialDo(), LogContent: init..
+2014-12-18 15:56:30 [aliceChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:30 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:30 [bobChild_3] initialDo(), LogContent: init..
+2014-12-18 15:56:30 [aliceChild_2] initialDo(), LogContent: init..
+2014-12-18 15:56:30 [bob] initialDo(), LogContent: init..
+2014-12-18 15:56:30 [bobChild_2] initialDo(), LogContent: init..
+2014-12-18 15:56:32 [alice] initialDo(), LogContent: init..
+2014-12-18 15:56:32 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:32 [aliceChild_2] initialDo(), LogContent: init..
+2014-12-18 15:56:32 [root] initialDo(), LogContent: init..
+2014-12-18 15:56:32 [bobChild_2] initialDo(), LogContent: init..
+2014-12-18 15:56:32 [bobChild_3] initialDo(), LogContent: init..
+2014-12-18 15:56:32 [aliceChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:32 [bob] initialDo(), LogContent: init..
+2014-12-18 15:56:32 [root] initialDo(), LogContent: get a msg from null, body is: ACTIVATE.
+2014-12-18 15:56:34 [alice] initialDo(), LogContent: init..
+2014-12-18 15:56:34 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:34 [bobChild_3] initialDo(), LogContent: init..
+2014-12-18 15:56:34 [aliceChild_2] initialDo(), LogContent: init..
+2014-12-18 15:56:34 [aliceChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:34 [bobChild_2] initialDo(), LogContent: init..
+2014-12-18 15:56:34 [bob] initialDo(), LogContent: init..
+2014-12-18 15:56:34 [root] activatedEntry(), LogContent: init..
+2014-12-18 15:56:34 [root] activatedEntry(), LogContent: send "ACTIVATE" msg to alice succeed!.
+2014-12-18 15:56:34 [root] activatedEntry(), LogContent: send "ACTIVATE" msg to bob succeed!.
+2014-12-18 15:56:36 [bobChild_2] initialDo(), LogContent: init..
+2014-12-18 15:56:36 [bob] initialDo(), LogContent: init..
+2014-12-18 15:56:36 [aliceChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:36 [bobChild_3] initialDo(), LogContent: init..
+2014-12-18 15:56:36 [aliceChild_2] initialDo(), LogContent: init..
+2014-12-18 15:56:36 [root] activateDo(), LogContent: init..
+2014-12-18 15:56:36 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:36 [alice] initialDo(), LogContent: init..
+2014-12-18 15:56:36 [root] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:36 [bob] initialDo(), LogContent: get a msg from root, body is: ACTIVATE.
+2014-12-18 15:56:36 [alice] initialDo(), LogContent: get a msg from root, body is: ACTIVATE.
+2014-12-18 15:56:38 [bob] activatedEntry(), LogContent: init..
+2014-12-18 15:56:38 [aliceChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:38 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:38 [alice] activatedEntry(), LogContent: init..
+2014-12-18 15:56:38 [aliceChild_2] initialDo(), LogContent: init..
+2014-12-18 15:56:38 [bobChild_3] initialDo(), LogContent: init..
+2014-12-18 15:56:38 [bobChild_2] initialDo(), LogContent: init..
+2014-12-18 15:56:38 [root] activateDo(), LogContent: init..
+2014-12-18 15:56:38 [root] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:38 [bob] activatedEntry(), LogContent: send "ACTIVATE" msg to bobChild_3 succeed!.
+2014-12-18 15:56:38 [alice] activatedEntry(), LogContent: send "ACTIVATE" msg to aliceChild_1 succeed!.
+2014-12-18 15:56:38 [alice] activatedEntry(), LogContent: send "ACTIVATE" msg to aliceChild_2 succeed!.
+2014-12-18 15:56:38 [bob] activatedEntry(), LogContent: send "ACTIVATE" msg to bobChild_2 succeed!.
+2014-12-18 15:56:38 [bob] activatedEntry(), LogContent: send "ACTIVATE" msg to bobChild_1 succeed!.
+2014-12-18 15:56:40 [aliceChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:40 [bobChild_3] initialDo(), LogContent: init..
+2014-12-18 15:56:40 [aliceChild_2] initialDo(), LogContent: init..
+2014-12-18 15:56:40 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:40 [bobChild_2] initialDo(), LogContent: init..
+2014-12-18 15:56:40 [bobChild_3] initialDo(), LogContent: get a msg from bob, body is: ACTIVATE.
+2014-12-18 15:56:40 [bobChild_2] initialDo(), LogContent: get a msg from bob, body is: ACTIVATE.
+2014-12-18 15:56:40 [bobChild_1] initialDo(), LogContent: get a msg from bob, body is: ACTIVATE.
+2014-12-18 15:56:40 [aliceChild_1] initialDo(), LogContent: get a msg from alice, body is: ACTIVATE.
+2014-12-18 15:56:40 [aliceChild_2] initialDo(), LogContent: get a msg from alice, body is: ACTIVATE.
+2014-12-18 15:56:40 [root] activateDo(), LogContent: init..
+2014-12-18 15:56:40 [root] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:40 [bobChild_1] initialDo(), LogContent: send ACTIVATEDFAILED msg to parent succeed!.
+2014-12-18 15:56:40 [alice] activateDo(), LogContent: init..
+2014-12-18 15:56:40 [alice] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:40 [bob] activateDo(), LogContent: init..
+2014-12-18 15:56:40 [bob] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:40 [bob] activatedDo_waitingSubReply(), LogContent: get a message from bobChild_1; body is: ACTIVATEDFAILED.
+2014-12-18 15:56:42 [bob] activateDo(), LogContent: init..
+2014-12-18 15:56:42 [alice] activateDo(), LogContent: init..
+2014-12-18 15:56:42 [aliceChild_1] activatedEntry(), LogContent: init..
+2014-12-18 15:56:42 [aliceChild_2] activatedEntry(), LogContent: init..
+2014-12-18 15:56:42 [root] activateDo(), LogContent: init..
+2014-12-18 15:56:42 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:42 [bobChild_2] activatedEntry(), LogContent: init..
+2014-12-18 15:56:42 [bobChild_3] activatedEntry(), LogContent: init..
+2014-12-18 15:56:42 [root] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:42 [alice] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:42 [bob] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:42 [bobChild_3] activatedEntry(), LogContent: send ACTIVATEDDONE msg to bob succeed!.
+2014-12-18 15:56:42 [bobChild_2] activatedEntry(), LogContent: send ACTIVATEDDONE msg to bob succeed!.
+2014-12-18 15:56:42 [aliceChild_1] activatedEntry(), LogContent: send ACTIVATEDDONE msg to alice succeed!.
+2014-12-18 15:56:42 [aliceChild_2] activatedEntry(), LogContent: send ACTIVATEDDONE msg to alice succeed!.
+2014-12-18 15:56:44 [aliceChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:44 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:44 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:44 [root] activateDo(), LogContent: init..
+2014-12-18 15:56:44 [alice] activateDo(), LogContent: init..
+2014-12-18 15:56:44 [bob] activateDo(), LogContent: init..
+2014-12-18 15:56:44 [aliceChild_1] activateDo(), LogContent: init..
+2014-12-18 15:56:44 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:56:44 [bob] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:44 [root] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:44 [alice] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:44 [bob] activatedDo_waitingSubReply(), LogContent: get a message from bobChild_2; body is: ACTIVATEDDONE.
+2014-12-18 15:56:44 [alice] activatedDo_waitingSubReply(), LogContent: get a message from aliceChild_1; body is: ACTIVATEDDONE.
+2014-12-18 15:56:46 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:46 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:46 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:56:46 [bob] activateDo(), LogContent: init..
+2014-12-18 15:56:46 [root] activateDo(), LogContent: init..
+2014-12-18 15:56:46 [aliceChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:46 [alice] activateDo(), LogContent: init..
+2014-12-18 15:56:46 [aliceChild_1] activateDo(), LogContent: init..
+2014-12-18 15:56:46 [bob] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:46 [root] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:46 [alice] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:46 [bob] activatedDo_waitingSubReply(), LogContent: get a message from bobChild_3; body is: ACTIVATEDDONE.
+2014-12-18 15:56:46 [alice] activatedDo_waitingSubReply(), LogContent: get a message from aliceChild_2; body is: ACTIVATEDDONE.
+2014-12-18 15:56:46 [bob] activatedDo_waitingSubReply(), LogContent: send ACTIVATEDDONE msg to parent..
+2014-12-18 15:56:46 [alice] activatedDo_waitingSubReply(), LogContent: send ACTIVATEDDONE msg to parent..
+2014-12-18 15:56:48 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:56:48 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:48 [aliceChild_1] activateDo(), LogContent: init..
+2014-12-18 15:56:48 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:48 [aliceChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:48 [root] activateDo(), LogContent: init..
+2014-12-18 15:56:48 [root] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:48 [root] activatedDo_waitingSubReply(), LogContent: get a message from bob; body is: ACTIVATEDDONE.
+2014-12-18 15:56:48 [bob] activateDo(), LogContent: init..
+2014-12-18 15:56:48 [alice] activateDo(), LogContent: init..
+2014-12-18 15:56:50 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:50 [aliceChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:50 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:50 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:56:50 [aliceChild_1] activateDo(), LogContent: init..
+2014-12-18 15:56:50 [root] activateDo(), LogContent: init..
+2014-12-18 15:56:50 [root] activatedDo_waitingSubReply(), LogContent: init..
+2014-12-18 15:56:50 [alice] activateDo(), LogContent: init..
+2014-12-18 15:56:50 [bob] activateDo(), LogContent: init..
+2014-12-18 15:56:50 [root] activatedDo_waitingSubReply(), LogContent: get a message from alice; body is: ACTIVATEDDONE.
+2014-12-18 15:56:50 [root] checkDefaultPreConditon(), LogContent: init..
+2014-12-18 15:56:52 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:52 [bob] activateDo(), LogContent: init..
+2014-12-18 15:56:52 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:56:52 [alice] activateDo(), LogContent: init..
+2014-12-18 15:56:52 [aliceChild_1] activateDo(), LogContent: init..
+2014-12-18 15:56:52 [aliceChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:52 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:52 [root] executingEntry(), LogContent: init..
+2014-12-18 15:56:52 [root] executingEntryDo_sendMesToOneSub_AND_SERIAL(), LogContent: init..
+2014-12-18 15:56:52 [root] executingEntryDo_sendMesToOneSub_AND_SERIAL(), LogContent: send START msg to alice succeed!.
+2014-12-18 15:56:54 [alice] activateDo(), LogContent: init..
+2014-12-18 15:56:54 [aliceChild_1] activateDo(), LogContent: init..
+2014-12-18 15:56:54 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:54 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:56:54 [aliceChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:54 [bob] activateDo(), LogContent: init..
+2014-12-18 15:56:54 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:54 [alice] activateDo(), LogContent: get a message from root; body is: START.
+2014-12-18 15:56:54 [alice] checkDefaultPreConditon(), LogContent: init..
+2014-12-18 15:56:54 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:56:54 [root] executingDo(), LogContent: init..
+2014-12-18 15:56:54 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:56:56 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:56 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:56:56 [aliceChild_1] activateDo(), LogContent: init..
+2014-12-18 15:56:56 [bob] activateDo(), LogContent: init..
+2014-12-18 15:56:56 [aliceChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:56 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:56 [alice] executingEntry(), LogContent: init..
+2014-12-18 15:56:56 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:56:56 [alice] executingEntry_sendMesToAllSub_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:56:56 [root] executingDo(), LogContent: init..
+2014-12-18 15:56:56 [alice] executingEntry_sendMesToAllSub_AND_PARALLERL(), LogContent: send START msg to aliceChild_1 succeed!.
+2014-12-18 15:56:56 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:56:56 [alice] executingEntry_sendMesToAllSub_AND_PARALLERL(), LogContent: send START msg to aliceChild_2 succeed!.
+2014-12-18 15:56:58 [aliceChild_1] activateDo(), LogContent: init..
+2014-12-18 15:56:58 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:56:58 [aliceChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:58 [bob] activateDo(), LogContent: init..
+2014-12-18 15:56:58 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:56:58 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:56:58 [aliceChild_2] activateDo(), LogContent: get a message from alice; body is: START.
+2014-12-18 15:56:58 [aliceChild_1] activateDo(), LogContent: get a message from alice; body is: START.
+2014-12-18 15:56:58 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:56:58 [root] executingDo(), LogContent: init..
+2014-12-18 15:56:58 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:56:58 [alice] checkIfSuspend(), LogContent: init..
+2014-12-18 15:56:58 [alice] executingDo(), LogContent: init..
+2014-12-18 15:56:58 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:57:00 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:00 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:00 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:00 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:00 [aliceChild_2] executingEntry(), LogContent: init..
+2014-12-18 15:57:00 [aliceChild_1] executingEntry(), LogContent: init..
+2014-12-18 15:57:00 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:00 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:00 [alice] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:00 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:00 [alice] executingDo(), LogContent: init..
+2014-12-18 15:57:00 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:57:02 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:02 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:02 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:02 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:02 [aliceChild_2] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:02 [aliceChild_1] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:02 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:02 [aliceChild_1] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:02 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:02 [alice] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:02 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:02 [alice] executingDo(), LogContent: init..
+2014-12-18 15:57:02 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:57:02 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:04 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:04 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:04 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:04 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:04 [aliceChild_2] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:04 [aliceChild_1] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:04 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:04 [aliceChild_1] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:04 [alice] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:04 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:04 [alice] executingDo(), LogContent: init..
+2014-12-18 15:57:04 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:04 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:57:04 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:06 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:06 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:06 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:06 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:06 [aliceChild_2] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:06 [aliceChild_1] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:06 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:06 [aliceChild_1] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:06 [alice] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:06 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:06 [alice] executingDo(), LogContent: init..
+2014-12-18 15:57:06 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:06 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:06 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:57:08 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:08 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:08 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:08 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:08 [aliceChild_2] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:08 [aliceChild_1] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:08 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:08 [aliceChild_1] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:08 [alice] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:08 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:08 [alice] executingDo(), LogContent: init..
+2014-12-18 15:57:08 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:08 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:57:08 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:10 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:10 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:10 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:10 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:10 [aliceChild_1] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:10 [aliceChild_2] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:10 [aliceChild_1] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:10 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:10 [alice] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:10 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:10 [alice] executingDo(), LogContent: init..
+2014-12-18 15:57:10 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:10 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:10 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:57:12 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:12 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:12 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:12 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:12 [aliceChild_1] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:12 [aliceChild_2] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:12 [aliceChild_1] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:12 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:12 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:12 [alice] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:12 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:12 [alice] executingDo(), LogContent: init..
+2014-12-18 15:57:12 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:57:12 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:14 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:14 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:14 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:14 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:14 [aliceChild_2] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:14 [aliceChild_1] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:14 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:14 [aliceChild_1] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:14 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:14 [alice] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:14 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:14 [alice] executingDo(), LogContent: init..
+2014-12-18 15:57:14 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:14 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:57:16 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:16 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:16 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:16 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:16 [aliceChild_1] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:16 [aliceChild_2] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:16 [aliceChild_1] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:16 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:16 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:16 [alice] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:16 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:16 [alice] executingDo(), LogContent: init..
+2014-12-18 15:57:16 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:16 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:57:18 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:18 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:18 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:18 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:18 [aliceChild_2] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:18 [aliceChild_1] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:18 [aliceChild_1] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:18 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:18 [alice] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:18 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:18 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:18 [alice] executingDo(), LogContent: init..
+2014-12-18 15:57:18 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:18 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:57:20 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:20 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:20 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:20 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:20 [aliceChild_1] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:20 [aliceChild_2] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:20 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:20 [aliceChild_1] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:20 [alice] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:20 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:20 [alice] executingDo(), LogContent: init..
+2014-12-18 15:57:20 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:20 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:20 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:57:22 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:22 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:22 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:22 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:22 [aliceChild_2] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:22 [aliceChild_1] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:22 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:22 [aliceChild_1] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:22 [aliceChild_1] executingDo_waitingEnd(), LogContent: get a message from null; body is: END.
+2014-12-18 15:57:22 [alice] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:22 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:22 [alice] executingDo(), LogContent: init..
+2014-12-18 15:57:22 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:22 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:57:22 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:24 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:24 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:24 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:24 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:24 [aliceChild_2] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:24 [aliceChild_1] achievedEntry(), LogContent: init..
+2014-12-18 15:57:24 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:24 [aliceChild_1] achievedEntry(), LogContent: send ACHIEVEDDONE msg to parent succeed!.
+2014-12-18 15:57:24 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:24 [alice] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:24 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:24 [alice] executingDo(), LogContent: init..
+2014-12-18 15:57:24 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:24 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:57:24 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: get a message from aliceChild_1; body is: ACHIEVEDDONE.
+2014-12-18 15:57:26 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:26 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:26 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:26 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:26 [aliceChild_2] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:26 [aliceChild_2] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:26 [aliceChild_1] achievedDo(), LogContent: init..
+2014-12-18 15:57:26 [aliceChild_1] stopMachine(), LogContent: It begins to stop its machine.
+2014-12-18 15:57:26 [aliceChild_2] executingDo_waitingEnd(), LogContent: get a message from null; body is: END.
+2014-12-18 15:57:26 [aliceChild_1] achievedDo(), LogContent: It has achieved its goal and stopped its machine!.
+2014-12-18 15:57:26 [alice] progressCheckingDo(), LogContent: init..
+2014-12-18 15:57:26 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:26 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:26 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:28 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:28 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:28 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:28 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:28 [aliceChild_2] achievedEntry(), LogContent: init..
+2014-12-18 15:57:28 [aliceChild_1] run(), LogContent: ElementMachine stop while cycling!.
+2014-12-18 15:57:28 [aliceChild_2] achievedEntry(), LogContent: send ACHIEVEDDONE msg to parent succeed!.
+2014-12-18 15:57:28 [alice] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:28 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:28 [alice] executingDo(), LogContent: init..
+2014-12-18 15:57:28 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:28 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: init..
+2014-12-18 15:57:28 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:28 [alice] executingDo_waitingSubReply_AND_PARALLERL(), LogContent: get a message from aliceChild_2; body is: ACHIEVEDDONE.
+2014-12-18 15:57:30 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:30 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:30 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:30 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:30 [aliceChild_2] achievedDo(), LogContent: init..
+2014-12-18 15:57:30 [aliceChild_2] stopMachine(), LogContent: It begins to stop its machine.
+2014-12-18 15:57:30 [aliceChild_2] achievedDo(), LogContent: It has achieved its goal and stopped its machine!.
+2014-12-18 15:57:30 [alice] progressCheckingDo(), LogContent: init..
+2014-12-18 15:57:30 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:30 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:30 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:32 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:32 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:32 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:32 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:32 [aliceChild_2] run(), LogContent: ElementMachine stop while cycling!.
+2014-12-18 15:57:32 [alice] achievedEntry(), LogContent: init..
+2014-12-18 15:57:32 [alice] achievedEntry(), LogContent: send ACHIEVEDDONE msg to parent succeed!.
+2014-12-18 15:57:32 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:32 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:32 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:32 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: get a message from alice; body is: ACHIEVEDDONE.
+2014-12-18 15:57:34 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:34 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:34 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:34 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:34 [alice] achievedDo(), LogContent: init..
+2014-12-18 15:57:34 [root] progressCheckingDo(), LogContent: init..
+2014-12-18 15:57:34 [alice] achievedDo(), LogContent: It has achieved its goal and stopped its machine!.
+2014-12-18 15:57:36 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:36 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:36 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:36 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:36 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:36 [alice] run(), LogContent: ElementMachine stop while cycling!.
+2014-12-18 15:57:36 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:36 [root] executingEntryDo_sendMesToOneSub_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:36 [root] executingEntryDo_sendMesToOneSub_AND_SERIAL(), LogContent: send START msg to bob succeed!.
+2014-12-18 15:57:38 [bob] activateDo(), LogContent: init..
+2014-12-18 15:57:38 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:38 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:38 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:38 [bob] activateDo(), LogContent: get a message from root; body is: START.
+2014-12-18 15:57:38 [bob] checkDefaultPreConditon(), LogContent: init..
+2014-12-18 15:57:38 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:38 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:38 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:40 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:40 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:40 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:40 [bob] executingEntry(), LogContent: init..
+2014-12-18 15:57:40 [bob] executingEntryDo_sendMesToOneSub_OR(), LogContent: init..
+2014-12-18 15:57:40 [bob] executingEntryDo_sendMesToOneSub_OR(), LogContent: send START msg to bobChild_3 succeed!.
+2014-12-18 15:57:40 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:40 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:40 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:42 [bobChild_3] activateDo(), LogContent: init..
+2014-12-18 15:57:42 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:42 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:42 [bobChild_3] activateDo(), LogContent: get a message from bob; body is: START.
+2014-12-18 15:57:42 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:42 [bob] executingDo(), LogContent: init..
+2014-12-18 15:57:42 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:57:42 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:42 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:42 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:44 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:44 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:44 [bobChild_3] executingEntry(), LogContent: init..
+2014-12-18 15:57:44 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:44 [bob] executingDo(), LogContent: init..
+2014-12-18 15:57:44 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:57:44 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:44 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:44 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:46 [bobChild_3] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:46 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:46 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:46 [bobChild_3] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:46 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:46 [bob] executingDo(), LogContent: init..
+2014-12-18 15:57:46 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:57:46 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:46 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:46 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:48 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:48 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:48 [bobChild_3] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:48 [bobChild_3] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:48 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:48 [bob] executingDo(), LogContent: init..
+2014-12-18 15:57:48 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:57:48 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:48 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:48 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:50 [bobChild_3] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:50 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:50 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:50 [bobChild_3] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:50 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:50 [bob] executingDo(), LogContent: init..
+2014-12-18 15:57:50 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:57:50 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:50 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:50 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:52 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:52 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:52 [bobChild_3] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:52 [bobChild_3] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:52 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:52 [bob] executingDo(), LogContent: init..
+2014-12-18 15:57:52 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:57:52 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:52 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:52 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:54 [bobChild_3] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:54 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:54 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:54 [bobChild_3] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:54 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:54 [bob] executingDo(), LogContent: init..
+2014-12-18 15:57:54 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:57:54 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:54 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:54 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:56 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:56 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:56 [bobChild_3] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:56 [bobChild_3] executingDo_waitingEnd(), LogContent: init..
+2014-12-18 15:57:56 [bobChild_3] executingDo_waitingEnd(), LogContent: get a message from null; body is: END.
+2014-12-18 15:57:56 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:56 [bob] executingDo(), LogContent: init..
+2014-12-18 15:57:56 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:57:56 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:56 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:56 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:57:58 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:57:58 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:57:58 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:58 [bob] executingDo(), LogContent: init..
+2014-12-18 15:57:58 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:57:58 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:57:58 [root] executingDo(), LogContent: init..
+2014-12-18 15:57:58 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:58:00 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:58:00 [bobChild_3] repairingDo(), LogContent: init..
+2014-12-18 15:58:00 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:58:00 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:00 [bob] executingDo(), LogContent: init..
+2014-12-18 15:58:00 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:58:00 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:00 [root] executingDo(), LogContent: init..
+2014-12-18 15:58:00 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:58:02 [bobChild_3] failedEntry(), LogContent: init..
+2014-12-18 15:58:02 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:58:02 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:58:02 [bobChild_3] failedEntry(), LogContent: send FAILED msg to parent succeed!.
+2014-12-18 15:58:02 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:02 [bob] executingDo(), LogContent: init..
+2014-12-18 15:58:02 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:58:02 [bob] executingDo_waitingSubReply_OR(), LogContent: get a message from bobChild_3; body is: FAILED.
+2014-12-18 15:58:02 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:02 [root] executingDo(), LogContent: init..
+2014-12-18 15:58:02 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:58:04 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:58:04 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:58:04 [bobChild_3] failedDo(), LogContent: init..
+2014-12-18 15:58:04 [bobChild_3] stopMachine(), LogContent: It begins to stop its machine.
+2014-12-18 15:58:04 [bobChild_3] failedDo(), LogContent: It failed to achieved its goal and stopped its machine!.
+2014-12-18 15:58:04 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:04 [root] executingDo(), LogContent: init..
+2014-12-18 15:58:04 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:58:06 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:58:06 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:58:06 [bobChild_3] run(), LogContent: ElementMachine stop while cycling!.
+2014-12-18 15:58:06 [bob] repairingDo(), LogContent: init..
+2014-12-18 15:58:06 [bob] subFailRepairing(), LogContent: init..
+2014-12-18 15:58:06 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:06 [root] executingDo(), LogContent: init..
+2014-12-18 15:58:06 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:58:08 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:58:08 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:58:08 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:08 [bob] executingDo(), LogContent: init..
+2014-12-18 15:58:08 [bob] executingEntryDo_sendMesToOneSub_OR(), LogContent: init..
+2014-12-18 15:58:08 [bob] executingEntryDo_sendMesToOneSub_OR(), LogContent: send START msg to bobChild_2 succeed!.
+2014-12-18 15:58:08 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:08 [root] executingDo(), LogContent: init..
+2014-12-18 15:58:08 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:58:10 [bobChild_2] activateDo(), LogContent: init..
+2014-12-18 15:58:10 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:58:10 [bobChild_2] activateDo(), LogContent: get a message from bob; body is: START.
+2014-12-18 15:58:10 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:10 [bob] executingDo(), LogContent: init..
+2014-12-18 15:58:10 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:58:10 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:10 [root] executingDo(), LogContent: init..
+2014-12-18 15:58:10 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:58:12 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:58:12 [bobChild_2] waitingEntry(), LogContent: init..
+2014-12-18 15:58:12 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:12 [bob] executingDo(), LogContent: init..
+2014-12-18 15:58:12 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:58:12 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:12 [root] executingDo(), LogContent: init..
+2014-12-18 15:58:12 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:58:14 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:58:14 [bobChild_2] waitingDo(), LogContent: init..
+2014-12-18 15:58:14 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:14 [bob] executingDo(), LogContent: init..
+2014-12-18 15:58:14 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:58:14 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:14 [root] executingDo(), LogContent: init..
+2014-12-18 15:58:14 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:58:16 [bobChild_2] waitingDo(), LogContent: init..
+2014-12-18 15:58:16 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:58:16 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:16 [bob] executingDo(), LogContent: init..
+2014-12-18 15:58:16 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:58:16 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:16 [root] executingDo(), LogContent: init..
+2014-12-18 15:58:16 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:58:18 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:58:18 [bobChild_2] waitingDo(), LogContent: init..
+2014-12-18 15:58:18 [bobChild_2] waitingDo(), LogContent: Waiting Timeout!!!!!!.
+2014-12-18 15:58:18 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:18 [bob] executingDo(), LogContent: init..
+2014-12-18 15:58:18 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:58:18 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:18 [root] executingDo(), LogContent: init..
+2014-12-18 15:58:18 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:58:20 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:58:20 [bobChild_2] failedEntry(), LogContent: init..
+2014-12-18 15:58:20 [bobChild_2] failedEntry(), LogContent: send FAILED msg to parent succeed!.
+2014-12-18 15:58:20 [bob] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:20 [bob] executingDo(), LogContent: init..
+2014-12-18 15:58:20 [bob] executingDo_waitingSubReply_OR(), LogContent: init..
+2014-12-18 15:58:20 [bob] executingDo_waitingSubReply_OR(), LogContent: get a message from bobChild_2; body is: FAILED.
+2014-12-18 15:58:20 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:20 [root] executingDo(), LogContent: init..
+2014-12-18 15:58:20 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:58:22 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:58:22 [bobChild_2] failedDo(), LogContent: init..
+2014-12-18 15:58:22 [bobChild_2] stopMachine(), LogContent: It begins to stop its machine.
+2014-12-18 15:58:22 [bobChild_2] failedDo(), LogContent: It failed to achieved its goal and stopped its machine!.
+2014-12-18 15:58:22 [bob] repairingDo(), LogContent: init..
+2014-12-18 15:58:22 [bob] subFailRepairing(), LogContent: init..
+2014-12-18 15:58:22 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:22 [root] executingDo(), LogContent: init..
+2014-12-18 15:58:22 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:58:24 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:58:24 [bobChild_2] run(), LogContent: ElementMachine stop while cycling!.
+2014-12-18 15:58:24 [bob] failedEntry(), LogContent: init..
+2014-12-18 15:58:24 [bob] failedEntry(), LogContent: send FAILED msg to parent succeed!.
+2014-12-18 15:58:24 [root] checkIfSuspend(), LogContent: init..
+2014-12-18 15:58:24 [root] executingDo(), LogContent: init..
+2014-12-18 15:58:24 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: init..
+2014-12-18 15:58:24 [root] executingDo_waitingSubReply_AND_SERIAL(), LogContent: get a message from bob; body is: FAILED.
+2014-12-18 15:58:26 [bobChild_1] initialDo(), LogContent: init..
+2014-12-18 15:58:26 [bob] failedDo(), LogContent: init..
+2014-12-18 15:58:26 [bob] stopMachine(), LogContent: send STOP msg to bobChild_1 succeed!.
+2014-12-18 15:58:26 [bob] failedDo(), LogContent: It failed to achieved its goal and stopped its machine!.
+2014-12-18 15:58:28 [bobChild_1] checkIfStop(), LogContent: get a message from bob; body is: STOP.
+2014-12-18 15:58:28 [bobChild_1] stopMachine(), LogContent: It begins to stop its machine.
+2014-12-18 15:58:28 [bob] run(), LogContent: ElementMachine stop while cycling!.
+2014-12-18 15:58:28 [root] repairingDo(), LogContent: init..
+2014-12-18 15:58:28 [root] subFailRepairing(), LogContent: init..
+2014-12-18 15:58:30 [bobChild_1] run(), LogContent: ElementMachine stop while cycling!.
+2014-12-18 15:58:30 [root] failedEntry(), LogContent: init..
+2014-12-18 15:58:32 [root] failedDo(), LogContent: init..
+2014-12-18 15:58:32 [root] failedDo(), LogContent: It failed to achieved its goal and stopped its machine!.
+2014-12-18 15:58:34 [root] run(), LogContent: ElementMachine stop while cycling!.

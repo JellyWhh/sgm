@@ -25,15 +25,6 @@ public class Test {
 
 		GoalMachine root = new GoalMachine("root", 0, 1, null) {
 
-			@Override
-			public State doRepairing(Condition condition) {
-				if (condition.getType().equals("COMMITMENT")) {
-					// this.setTimeLimit(60 * 60); // 60分钟
-					return State.Failed;
-				}
-				// TODO Auto-generated method stub
-				return null;
-			}
 
 			@Override
 			public void checkPreCondition() {
@@ -76,12 +67,6 @@ public class Test {
 		GoalMachine alice = new GoalMachine("alice", 0, 0, root) {
 
 			@Override
-			public State doRepairing(Condition condition) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
 			public void checkPreCondition() {
 				// TODO Auto-generated method stub
 
@@ -112,12 +97,6 @@ public class Test {
 			}
 		};
 		GoalMachine bob = new GoalMachine("bob", 1, -1, root) {
-
-			@Override
-			public State doRepairing(Condition condition) {
-				// TODO Auto-generated method stub
-				return null;
-			}
 
 			@Override
 			public void checkPreCondition() {
@@ -153,16 +132,6 @@ public class Test {
 		TaskMachine aliceChild_1 = new TaskMachine("aliceChild_1", alice) {
 
 			@Override
-			public State doRepairing(Condition condition) {
-				if (condition.getType().equals("CONTEXT")) {
-					this.getContextCondition().setSatisfied(true);
-					return State.Activated;
-				} else {
-					return null;
-				}
-			}
-
-			@Override
 			public void checkPreCondition() {
 				// TODO Auto-generated method stub
 
@@ -195,26 +164,16 @@ public class Test {
 			}
 
 			@Override
-			public void executingDo() {
+			public void executingDo(SGMMessage msg) {
 				System.out
 						.println("aliceChild_1 is doing his executingDoAction...");
-				this.executingDo_waitingEnd();
+				this.executingDo_waitingEnd(msg);
 			}
 		};
 
 		TaskMachine aliceChild_2 = new TaskMachine("aliceChild_2", alice) {
 
 			@Override
-			public State doRepairing(Condition condition) {
-				if (condition.getType().equals("CONTEXT")) {
-					this.getContextCondition().setSatisfied(false);
-					return State.Failed; // 修复不成功，直接进入failed状态
-				} else {
-					return null;
-				}
-			}
-
-			@Override
 			public void checkPreCondition() {
 				// TODO Auto-generated method stub
 
@@ -246,10 +205,10 @@ public class Test {
 			}
 
 			@Override
-			public void executingDo() {
+			public void executingDo(SGMMessage msg) {
 				System.out
 						.println("aliceChild_2 is doing his executingDoAction...");
-				this.executingDo_waitingEnd();
+				this.executingDo_waitingEnd(msg);
 
 			}
 		};
@@ -257,16 +216,6 @@ public class Test {
 		TaskMachine bobChild_1 = new TaskMachine("bobChild_1", bob) {
 
 			@Override
-			public State doRepairing(Condition condition) {
-				if (condition.getType().equals("CONTEXT")) {
-					this.getContextCondition().setSatisfied(true);
-					return State.Activated;
-				} else {
-					return null;
-				}
-			}
-
-			@Override
 			public void checkPreCondition() {
 				// TODO Auto-generated method stub
 
@@ -299,25 +248,15 @@ public class Test {
 			}
 
 			@Override
-			public void executingDo() {
+			public void executingDo(SGMMessage msg) {
 				System.out
 						.println("bobChild_1 is doing his executingDoAction...");
-				this.executingDo_waitingEnd();
+				this.executingDo_waitingEnd(msg);
 
 			}
 		};
 
 		TaskMachine bobChild_2 = new TaskMachine("bobChild_2", bob) {
-
-			@Override
-			public State doRepairing(Condition condition) {
-				if (condition.getType().equals("CONTEXT")) {
-					this.getContextCondition().setSatisfied(true);
-					return State.Activated;
-				} else {
-					return null;
-				}
-			}
 
 			@Override
 			public void checkPreCondition() {
@@ -354,28 +293,15 @@ public class Test {
 			}
 
 			@Override
-			public void executingDo() {
+			public void executingDo(SGMMessage msg) {
 				System.out
 						.println("bobChild_2 is doing his executingDoAction...");
-				this.executingDo_waitingEnd();
+				this.executingDo_waitingEnd(msg);
 
 			}
 		};
 		TaskMachine bobChild_3 = new TaskMachine("bobChild_3", bob) {
 
-			@Override
-			public State doRepairing(Condition condition) {
-				if (condition.getType().equals("CONTEXT")) {
-					this.getContextCondition().setSatisfied(true);
-					return State.Activated; // 修复不成功，直接进入failed状态
-				} else if (condition.getType().equals("POST")) {
-					// post condition不满足，并且修复失败
-					this.getPostCondition().setSatisfied(false);
-					return State.Failed;
-				} else {
-					return null;
-				}
-			}
 
 			@Override
 			public void checkPreCondition() {
@@ -402,6 +328,7 @@ public class Test {
 				if (true) {
 					this.getContextCondition().setSatisfied(false);
 				}
+
 			}
 
 			@Override
@@ -411,20 +338,22 @@ public class Test {
 			}
 
 			@Override
-			public void executingDo() {
+			public void executingDo(SGMMessage msg) {
 				System.out
 						.println("bobChild_3 is doing his executingDoAction...");
-				this.executingDo_waitingEnd();
+				this.executingDo_waitingEnd(msg);
 			}
 		};
 		// root.setCommitmentCondition(new Condition("COMMITMENT"));
 		// root.setTimeLimit(10); // 10S
 
-		aliceChild_1.setContextCondition(new Condition("CONTEXT"));
-		// aliceChild_2.setContextCondition(new Condition("CONTEXT"));
+	//	aliceChild_1.setContextCondition(new Condition("CONTEXT"));
+		
+		bobChild_1.setContextCondition(new Condition("CONTEXT"));
+
 		bobChild_2.setPreCondition(new Condition("PRE", false));
 		bobChild_2.setWaitingTimeLimit(5);// 5s
-		bobChild_3.setContextCondition(new Condition("CONTEXT"));
+		
 		bobChild_3.setPostCondition(new Condition("POST"));
 
 		root.addSubElement(alice, 1);
@@ -475,37 +404,37 @@ public class Test {
 				}
 
 				try {
-					Thread.sleep(20 * 1000);
+					Thread.sleep(50 * 1000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
-				SGMMessage rootSuspendMsg = new SGMMessage("TOROOT", null,
-						root.getName(), "SUSPEND");
-				if (root.getMsgPool().offer(rootSuspendMsg)) {
-					System.out.println("Main thread sends an SUSPEND msg to root.");
-				}
-
-				try {
-					Thread.sleep(35 * 1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				SGMMessage rootResumeMsg = new SGMMessage("TOROOT", null,
-						root.getName(), "RESUME");
-				if (root.getMsgPool().offer(rootResumeMsg)) {
-					System.out.println("Main thread sends an RESUME msg to root.");
-				}
-
-				try {
-					Thread.sleep(10 * 1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				SGMMessage rootSuspendMsg = new SGMMessage("TOROOT", null,
+//						root.getName(), "SUSPEND");
+//				if (root.getMsgPool().offer(rootSuspendMsg)) {
+//					System.out.println("Main thread sends an SUSPEND msg to root.");
+//				}
+//
+//				try {
+//					Thread.sleep(35 * 1000);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//
+//				SGMMessage rootResumeMsg = new SGMMessage("TOROOT", null,
+//						root.getName(), "RESUME");
+//				if (root.getMsgPool().offer(rootResumeMsg)) {
+//					System.out.println("Main thread sends an RESUME msg to root.");
+//				}
+//
+//				try {
+//					Thread.sleep(10 * 1000);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 
 				SGMMessage aliceChild1End = new SGMMessage("TOROOT", null,
 						aliceChild_1.getName(), "END");
@@ -546,24 +475,24 @@ public class Test {
 					e.printStackTrace();
 				}
 
-				SGMMessage bobChild2End = new SGMMessage("TOROOT", null,
-						bobChild_2.getName(), "END");
-				if (bobChild_2.getMsgPool().offer(bobChild2End)) {
-					System.out.println("Main thread sends a END msg to bobChild_2.");
-				}
-
-				try {
-					Thread.sleep(10 * 1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				SGMMessage bobChild1End = new SGMMessage("TOROOT", null,
-						bobChild_1.getName(), "END");
-				if (bobChild_1.getMsgPool().offer(bobChild1End)) {
-					System.out.println("Main thread sends a END msg to bobChild_1.");
-				}
+//				SGMMessage bobChild2End = new SGMMessage("TOROOT", null,
+//						bobChild_2.getName(), "END");
+//				if (bobChild_2.getMsgPool().offer(bobChild2End)) {
+//					System.out.println("Main thread sends a END msg to bobChild_2.");
+//				}
+//
+//				try {
+//					Thread.sleep(10 * 1000);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//
+//				SGMMessage bobChild1End = new SGMMessage("TOROOT", null,
+//						bobChild_1.getName(), "END");
+//				if (bobChild_1.getMsgPool().offer(bobChild1End)) {
+//					System.out.println("Main thread sends a END msg to bobChild_1.");
+//				}
 				
 			}
 		});

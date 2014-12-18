@@ -56,17 +56,18 @@ public abstract class TaskMachine extends ElementMachine {
 	 * <code>GoalMachine中需要重写</code>
 	 */
 	@Override
-	public void activateDo() {
+	public void activateDo(SGMMessage msg) {
 		Log.logDebug(this.getName(), "activateDo()", "init.");
 
-		SGMMessage msg = this.getMsgPool().poll(); // 每次拿出一条消息
+		//SGMMessage msg = this.getMsgPool().poll(); // 每次拿出一条消息
 		if (msg != null) {
-			Log.logDebug(this.getName(), "activateDo_waitingParentNotify()",
+			Log.logDebug(this.getName(), "activateDo()",
 					"get a message from " + msg.getSender() + "; body is: "
 							+ msg.getBody());
 
 			// 消息内容是START，表示父目标让当前目标开始状态转换
 			if (msg.getBody().equals("START")) {
+				this.getMsgPool().poll();
 				this.setCurrentState(this.transition(State.Activated,
 						this.getPreCondition()));
 			}
@@ -80,25 +81,27 @@ public abstract class TaskMachine extends ElementMachine {
 	 * executing状态中do所做的action：这个需要根据具体的task有不同的具体执行行为，所以这个是抽象方法，在实例化时具体实现
 	 */
 	@Override
-	public abstract void executingDo();
+	public abstract void executingDo(SGMMessage msg);
 
 	/**
 	 * executing状态中do所做的action：等待外部进程（比如UI）发来的END消息，这个方法在executingDo()方法的具体实现中调用<br>
 	 * 接到END消息后，尝试跳转到Achieved
 	 */
-	public void executingDo_waitingEnd() {
+	public void executingDo_waitingEnd(SGMMessage msg) {
 		Log.logDebug(this.getName(), "executingDo_waitingEnd()", "init.");
 
-		SGMMessage msg = this.getMsgPool().poll(); // 拿出一条消息
+		//SGMMessage msg = this.getMsgPool().poll(); // 拿出一条消息
 		if (msg != null) {
 			Log.logDebug(this.getName(), "executingDo_waitingEnd()",
 					"get a message from " + msg.getSender() + "; body is: "
 							+ msg.getBody());
 
 			if (msg.getBody().equals("END")) {	//收到外部UI的END消息
+				this.getMsgPool().poll();
 				this.setCurrentState(this.transition(State.Executing,
 						this.getPostCondition()));
 			}else if (msg.getBody().equals("SUSPEND")) {	//收到父目标的SUSPEND消息
+				this.getMsgPool().poll();
 				this.setCurrentState(State.Suspended);
 			}
 		}
@@ -109,13 +112,14 @@ public abstract class TaskMachine extends ElementMachine {
 	 * 把目标状态转换为executing状态
 	 */
 	@Override
-	public void suspendedDo() {
+	public void suspendedDo(SGMMessage msg) {
 		Log.logDebug(this.getName(), "suspendedDo()", "init.");
-		SGMMessage msg = this.getMsgPool().poll(); // 每次拿出一条消息
+	//	SGMMessage msg = this.getMsgPool().poll(); // 每次拿出一条消息
 		if (msg != null) {
 			Log.logDebug(this.getName(), "suspendedDo()", "get a message from "
 					+ msg.getSender() + "; body is: " + msg.getBody());
 			if (msg.getBody().equals("RESUME")) {
+				this.getMsgPool().poll();
 				// 把自己状态设置为executing
 				this.setCurrentState(State.Executing);
 			}

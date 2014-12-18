@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import edu.fudan.se.goalmachine.support.CauseToRepairing;
+import edu.fudan.se.goalmachine.support.RecordedState;
 import edu.fudan.se.log.Log;
 
 /**
@@ -26,7 +28,7 @@ public abstract class ElementMachine implements Runnable {
 
 	private BlockingQueue<SGMMessage> msgPool; // 消息队列，即消息池，可以直观理解为当前element的个人信箱
 
-	private State recordedState = State.Initial; // 让父目标用来记录当前element的状态
+	private RecordedState recordedState = RecordedState.Initial; // 让父目标用来记录当前element的状态
 	private int priorityLevel; // 让父目标用来记录当前element的优先级
 
 	private Date startTime; // 当前element machine开始执行时的时间
@@ -44,7 +46,9 @@ public abstract class ElementMachine implements Runnable {
 	private Condition commitmentCondition; // 整个shouldDo符合状态里都有可能不满足的，要一直检查
 	private Condition invariantCondition; // 整个shouldDo符合状态里都有可能不满足的，要一直检查
 
-	private Condition conditionCauseToRepairing;
+	private Condition defaultPreCondition; // default pre
+											// condition，GoalMachine不为空，用来检查是不是所有的子目标都激活成功了。
+	private CauseToRepairing causeToRepairing;
 
 	/* 标记各种状态的entry动作是否完成 */
 	boolean isInitialEntryDone = false;
@@ -96,15 +100,19 @@ public abstract class ElementMachine implements Runnable {
 	 * 主体持续运行的行为，包括从消息池里检出消息，以及在对应的状态执行相应的行为
 	 */
 	private void doMainRunningBehaviour() {
+
+		// 每次循环拿出一条消息，然后后面有不同的方法来处理这个消息，如果消息被处理了，再从消息队列中把这条消息移除，这样可以保证每条消息都经过了处理，不会漏掉
+		SGMMessage msg = this.getMsgPool().peek();
+
 		// 每次开始前都先检查是否有STOP消息到来
-		if (checkIfStop()) { // 有STOP消息
+		if (checkIfStop(msg)) { // 有STOP消息
 			this.stopMachine();
 		} else {
 
 			switch (this.getCurrentState()) {
 			case Initial: // initial
 				if (isInitialEntryDone) { // 如果完成了entry动作，循环执行do动作
-					initialDo();
+					initialDo(msg);
 				} else {
 					initialEntry(); // entry动作只会执行一次
 					isInitialEntryDone = true; // 设置为true表示这个entry动作做完了，以后不会再执行了
@@ -117,7 +125,7 @@ public abstract class ElementMachine implements Runnable {
 				} else {
 
 					if (isActivatedEntryDone) { // 自己激活后就等待父目标的Start指令
-						activateDo();
+						activateDo(msg);
 					} else { // 刚进入激活状态，尝试把自己状态转换为激活
 						activatedEntry();
 						isActivatedEntryDone = true; // 设置为true表示这个entry动作做完了，以后不会再执行了
@@ -145,14 +153,14 @@ public abstract class ElementMachine implements Runnable {
 
 					if (isExecutingEntryDone) {
 						// 先检查一下是否有SUSPEND消息到达
-						if (checkIfSuspend()) { // 需要挂起
+						if (checkIfSuspend(msg)) { // 需要挂起
 							break;
 						} else { // 不需要挂起
-							executingDo();
+							executingDo(msg);
 						}
 
 					} else {
-						executingEntry();
+						executingEntry(msg);
 						isExecutingEntryDone = true;
 					}
 				}
@@ -164,7 +172,7 @@ public abstract class ElementMachine implements Runnable {
 				} else {
 
 					if (isSuspendedEntryDone) {
-						suspendedDo();
+						suspendedDo(msg);
 					} else {
 						suspendedEntry();
 						isSuspendedEntryDone = true;
@@ -215,15 +223,15 @@ public abstract class ElementMachine implements Runnable {
 	 */
 	public void initialEntry() {
 		Log.logDebug(this.getName(), "initialEntry()", "init.");
-		this.setStartTime(new Date()); // setTimer
+		// this.setStartTime(new Date()); // setTimer
 	}
 
 	/**
 	 * initial状态的do所做的action：监听消息池，看是否有ACTIVATE消息到达
 	 */
-	public void initialDo() {
+	public void initialDo(SGMMessage msg) {
 		Log.logDebug(this.getName(), "initialDo()", "init.");
-		SGMMessage msg = this.getMsgPool().poll(); // 每次拿出一条消息
+		// SGMMessage msg = this.getMsgPool().poll(); // 每次拿出一条消息
 		if (msg != null) {
 			Log.logDebug(
 					this.name,
@@ -233,8 +241,19 @@ public abstract class ElementMachine implements Runnable {
 
 			// 收到消息后的行为处理
 			if (msg.getBody().equals("ACTIVATE")) {
+				this.getMsgPool().poll();
 				this.setCurrentState(transition(State.Initial,
 						this.getContextCondition()));
+				// 如果激活后发现状态仍然回到了Intial状态，说明上下文不满足，激活失败，告诉父目标激活失败
+				if (this.getCurrentState() == State.Initial) {
+					if (sendMessageToParent("ACTIVATEDFAILED")) {
+						Log.logDebug(this.getName(), "initialDo()",
+								"send ACTIVATEDFAILED msg to parent succeed!");
+					} else {
+						Log.logError(this.getName(), "initialDo()",
+								"send ACTIVATEDFAILED msg to parent error!");
+					}
+				}
 			}
 		}
 	}
@@ -250,7 +269,7 @@ public abstract class ElementMachine implements Runnable {
 	 * activated状态中do所做的action：自身不是root goal，所以要一直等待父目标的START指令，收到后才可以发生状态转换<br>
 	 * <code>GoalMachine中需要重写</code>
 	 */
-	public void activateDo() {
+	public void activateDo(SGMMessage msg) {
 
 	}
 
@@ -300,7 +319,7 @@ public abstract class ElementMachine implements Runnable {
 	/**
 	 * executing状态中entry所做的action：<code>GoalMachine</code>需要重写
 	 */
-	public void executingEntry() {
+	public void executingEntry(SGMMessage msg) {
 		Log.logDebug(this.getName(), "executingEntry()", "init.");
 
 	}
@@ -308,7 +327,7 @@ public abstract class ElementMachine implements Runnable {
 	/**
 	 * executing状态中do所做的action：需要重写
 	 */
-	public void executingDo() {
+	public void executingDo(SGMMessage msg) {
 
 	}
 
@@ -317,22 +336,20 @@ public abstract class ElementMachine implements Runnable {
 	 * 
 	 * @return true 表示需要挂起，直接进入挂起状态，不能再执行下面的代码；false 不需要挂起
 	 */
-	private boolean checkIfSuspend() {
+	private boolean checkIfSuspend(SGMMessage msg) {
 		Log.logDebug(this.getName(), "checkIfSuspend()", "init.");
 
 		// 这里用peek()方法取消息，Retrieves, but does not
 		// remove，这样就不会影响接下来的executingDo()方法中取消息了
-		SGMMessage msg = this.getMsgPool().peek(); // 每次拿出一条消息
+		// SGMMessage msg = this.getMsgPool().peek(); // 每次拿出一条消息
 		if (msg != null) {
 
 			// 消息内容是SUSPEND，表示父目标让当前目标进入挂起
 			if (msg.getBody().equals("SUSPEND")) {
-
+				this.getMsgPool().poll(); // 如果消息真的是SUSPEND，那么就把它拿出来
 				Log.logDebug(this.getName(), "checkIfSuspend()",
 						"get a message from " + msg.getSender() + "; body is: "
 								+ msg.getBody());
-
-				this.getMsgPool().poll(); // 如果消息真的是SUSPEND，那么就把它拿出来
 				this.setCurrentState(State.Suspended);
 				return true;
 			}
@@ -351,7 +368,7 @@ public abstract class ElementMachine implements Runnable {
 	/**
 	 * suspended状态中do所做的action：需要重写
 	 */
-	public void suspendedDo() {
+	public void suspendedDo(SGMMessage msg) {
 
 	}
 
@@ -368,8 +385,7 @@ public abstract class ElementMachine implements Runnable {
 	 */
 	public void repairingDo() {
 		Log.logDebug(this.getName(), "repairingDo()", "init.");
-		this.setCurrentState(this.transition(State.Repairing,
-				this.getConditionCauseToRepairing()));
+		this.setCurrentState(this.transition(State.Repairing, null));
 	}
 
 	/**
@@ -447,23 +463,15 @@ public abstract class ElementMachine implements Runnable {
 	 * 
 	 * @return true 有STOP消息到来；false 没有STOP消息到来
 	 */
-	private boolean checkIfStop() {
-		// Log.logDebug(this.getName(), "checkIfStop()", "init.");
-
-		// 这里用peek()方法取消息，Retrieves, but does not
-		// remove，这样就不会影响接下来的方法取消息了
-		SGMMessage msg = this.getMsgPool().peek(); // 每次拿出一条消息
+	private boolean checkIfStop(SGMMessage msg) {
 		if (msg != null) {
 
 			// 消息内容是SUSPEND，表示父目标让当前目标进入挂起
 			if (msg.getBody().equals("STOP")) {
-
+				this.getMsgPool().poll(); // 如果消息真的是STOP，那么就把它拿出来
 				Log.logDebug(this.getName(), "checkIfStop()",
 						"get a message from " + msg.getSender() + "; body is: "
 								+ msg.getBody());
-
-				this.getMsgPool().poll(); // 如果消息真的是STOP，那么就把它拿出来
-
 				return true;
 			}
 		}
@@ -496,9 +504,9 @@ public abstract class ElementMachine implements Runnable {
 						ret = State.Activated; // context
 												// condition满足，跳转到Activated
 					} else {
-						ret = State.Repairing; // context
-												// condition不满足，跳转到Repairing
-						this.setConditionCauseToRepairing(condition);
+						ret = State.Initial; // context
+												// condition不满足，跳回到initial状态，同时告诉父目标自己激活失败
+						// this.setConditionCauseToRepairing(condition);
 					}
 				}
 			}
@@ -506,11 +514,26 @@ public abstract class ElementMachine implements Runnable {
 
 		case Activated: // 1(activated)
 
+			// 先检查隐含的default pre conditon，基本只针对goal machine，task
+			// machine的defaultPreConditon为空
+			if (this.getDefaultPreCondition() != null) {
+				checkDefaultPreConditon();
+				// default pre condition不满足
+				if (!this.getDefaultPreCondition().isSatisfied()) {
+					ret = State.Repairing;
+					this.setCauseToRepairing(CauseToRepairing.DefaultPreCondition);
+
+					break; // 直接跳到修复，不用再检查下面的pre condition了
+				}
+			}
+
+			// 再检查pre condition
 			if (condition == null) { // pre condition为空
 				ret = State.Executing; // 直接跳转到Executing
 			} else {
 				// 先判断条件是不是pre condition，是的话执行检查然后根据结果进行跳转；如果不是，无意义，返回-1
 				if (condition.getType().equals("PRE")) {
+
 					checkPreCondition();
 					if (condition.isSatisfied()) {
 						ret = State.Executing; // pre condition满足，跳转到Executing
@@ -518,6 +541,7 @@ public abstract class ElementMachine implements Runnable {
 						if (condition.isCanRepairing()) {
 							ret = State.Repairing; // pre
 													// condition不满足，但是能够被修复，跳转到Repairing
+							this.setCauseToRepairing(CauseToRepairing.PreCondition);
 						} else {
 							ret = State.Waiting; // pre
 													// condition不满足，而且不能够被修复，跳转到Waiting
@@ -540,14 +564,14 @@ public abstract class ElementMachine implements Runnable {
 						ret = State.Achieved; // post condition满足，跳转到Achieved
 					} else {
 						ret = State.Repairing; // post condition不满足，跳转到Repairing
-						this.setConditionCauseToRepairing(condition);
+						this.setCauseToRepairing(CauseToRepairing.PostCondition);
 					}
 				}
 			}
 			break;
 
 		case Repairing:
-			ret = doRepairing(condition);
+			ret = doRepairing(this.getCauseToRepairing());
 			break;
 
 		default:
@@ -558,13 +582,53 @@ public abstract class ElementMachine implements Runnable {
 	}
 
 	/**
-	 * 根据不同的策略进行修复，修复成功后仍然是根据不同的策略跳转到不同的状态
+	 * 根据不同的策略进行修复，修复成功后仍然是根据不同的策略跳转到不同的状态<br>
+	 * 要有一张修复策略表对应
 	 * 
-	 * @param condition
-	 *            违反的条件
+	 * @param cause
+	 *            导致进入修复的原因，可能是Condition违反，也可能是subFail
 	 * @return 修复结束后要跳转到的状态
 	 */
-	public abstract State doRepairing(Condition condition);
+	private State doRepairing(CauseToRepairing cause) {
+		// TODO
+		State retState = State.Repairing; // 默认返回repairing状态，以防出现异常修复失败
+		switch (cause) {
+		case InvViolated:
+			retState = State.Failed;
+			break;
+		case CcViolated:
+			retState = State.Failed;
+			break;
+		case SubFail:
+			retState = subFailRepairing();
+			break;
+		case PreCondition:
+			retState = State.Failed;
+			break;
+		case PostCondition:
+			retState = State.Failed;
+			break;
+		case DefaultPreCondition:
+			// default pre condition不满足，也就是有子目标激活失败，直接failed（只针对GoalMachine）
+			retState = State.Failed;
+			break;
+
+		default:
+			break;
+		}
+
+		return retState;
+	}
+
+	/**
+	 * 对SubFail情况进行修复，<code>GoalMachine</code>需要重写；<code>TaskMachine</code>
+	 * 不需要，因为Task不会收到SubFail消息
+	 * 
+	 * @return 默认返回repairing状态
+	 */
+	public State subFailRepairing() {
+		return State.Repairing;
+	}
 
 	/**
 	 * 在ShouldDo复合状态中队commitment condition和invariant
@@ -581,7 +645,7 @@ public abstract class ElementMachine implements Runnable {
 				Log.logDebug(this.getName(), "doCCandInvCChecking()",
 						"commitment condition violation is detected!!!");
 				this.setCurrentState(State.Repairing);
-				this.setConditionCauseToRepairing(this.getCommitmentCondition());
+				this.setCauseToRepairing(CauseToRepairing.CcViolated);
 				return true;
 			}
 		}
@@ -593,7 +657,7 @@ public abstract class ElementMachine implements Runnable {
 				Log.logDebug(this.getName(), "doCCandInvCChecking()",
 						"invariant condition violation is detected!!!");
 				this.setCurrentState(State.Repairing);
-				this.setConditionCauseToRepairing(this.getInvariantCondition());
+				this.setCauseToRepairing(CauseToRepairing.InvViolated);
 				return true;
 			}
 		}
@@ -629,6 +693,14 @@ public abstract class ElementMachine implements Runnable {
 
 		Log.logDebug(this.getName(), "stopMachine()",
 				"It begins to stop its machine");
+	}
+
+	/**
+	 * 检查default pre condition，<code>GoalMachine</code>需要重写，
+	 * <code>TaskMachine</code>不需要重写
+	 */
+	public void checkDefaultPreConditon() {
+
 	}
 
 	// *************结束一些辅助方法************************
@@ -680,11 +752,11 @@ public abstract class ElementMachine implements Runnable {
 		this.msgPool = msgPool;
 	}
 
-	public State getRecordedState() {
+	public RecordedState getRecordedState() {
 		return recordedState;
 	}
 
-	public void setRecordedState(State recordedState) {
+	public void setRecordedState(RecordedState recordedState) {
 		this.recordedState = recordedState;
 	}
 
@@ -784,12 +856,20 @@ public abstract class ElementMachine implements Runnable {
 		this.invariantCondition = invariantCondition;
 	}
 
-	public Condition getConditionCauseToRepairing() {
-		return conditionCauseToRepairing;
+	public Condition getDefaultPreCondition() {
+		return defaultPreCondition;
 	}
 
-	public void setConditionCauseToRepairing(Condition conditionCauseToRepairing) {
-		this.conditionCauseToRepairing = conditionCauseToRepairing;
+	public void setDefaultPreCondition(Condition defaultPreCondition) {
+		this.defaultPreCondition = defaultPreCondition;
+	}
+
+	public CauseToRepairing getCauseToRepairing() {
+		return causeToRepairing;
+	}
+
+	public void setCauseToRepairing(CauseToRepairing causeToRepairing) {
+		this.causeToRepairing = causeToRepairing;
 	}
 
 }
